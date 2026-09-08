@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PiNova - منصة ذكية متكاملة</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+    body {
+      background: #EBF5FB;
+      color: #1e293b;
+      min-height: 100vh;
+      padding-bottom: 90px;
+      overflow-x: hidden;
+    }
+
+    /* Animated Background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(34, 197, 94, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(251, 191, 36, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
+      z-index: -1;
+      animation: pulse 8s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(241, 245, 249, 0.95));
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 3px solid #fbbf24;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 22px;
+      font-weight: bold;
+      color: #1e293b;
+    }
+    .logo-icon {
+      width: 42px; height: 42px;
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
+    }
+    .header-actions { display: flex; gap: 10px; }
+    .icon-btn {
+      width: 40px; height: 40px;
+      background: rgba(251, 191, 36, 0.15);
+      border-radius: 50%;
+      border: 2px solid #fbbf24;
+      color: #f59e0b;
+      cursor: pointer;
+      font-size: 18px;
+      transition: all 0.3s;
+    }
+    .icon-btn:hover { 
+      background: rgba(251, 191, 36, 0.3); 
+      transform: scale(1.1);
+      box-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 30px 20px 20px;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-block;
+      padding: 8px 20px;
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), rgba(234, 179, 8, 0.15));
+      border: 2px solid #fbbf24;
+      border-radius: 25px;
+      font-size: 13px;
+      margin-bottom: 15px;
+      color: #92400e;
+      font-weight: bold;
+    }
+    .hero h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, #f59e0b, #d97706, #16a34a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p { color: #475569; font-size: 15px; line-height: 1.6; }
+
+    /* Pi Balance */
+    .pi-balance {
+      margin: 20px;
+      padding: 20px;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      border-radius: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);
+      border: 2px solid #fbbf24;
+    }
+    .pi-balance .amount { font-size: 26px; font-weight: bold; color: #fff; }
+    .pi-balance .label { font-size: 13px; opacity: 0.95; color: #fef3c7; }
+    .pi-btn {
+      padding: 10px 20px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 12px;
+      border: 2px solid #fff;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s;
+    }
+    .pi-btn:hover {
+      background: rgba(255,255,255,0.4);
+      transform: scale(1.05);
+    }
+
+    /* Section Title */
+    .section-title {
+      padding: 0 20px;
+      margin: 30px 0 18px;
+      font-size: 20px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #1e293b;
+    }
+    .section-title::before {
+      content: '';
+      width: 5px;
+      height: 28px;
+      background: linear-gradient(180deg, #fbbf24, #22c55e);
+      border-radius: 3px;
+      box-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+    }
+
+    /* Main Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      padding: 0 20px;
+    }
+    @media (max-width: 480px) {
+      .cards-grid { grid-template-columns: 1fr; }
+    }
+    .card {
+      padding: 25px 20px;
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.4s;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 2px solid rgba(251, 191, 36, 0.3);
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card:hover { 
+      transform: translateY(-8px); 
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+    .card-badge {
+      display: inline-block;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: bold;
+      margin-bottom: 12px;
+      background: rgba(251, 191, 36, 0.25);
+      border: 1px solid #fbbf24;
+      color: #92400e;
+      width: fit-content;
+    }
+    .card-icon-main {
+      font-size: 48px;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 0 15px currentColor);
+    }
+    .card h3 { font-size: 18px; margin-bottom: 8px; font-weight: bold; color: #1e293b; }
+    .card p { font-size: 12px; opacity: 0.95; margin-bottom: 15px; line-height: 1.5; color: #475569; }
+    .card-btn {
+      padding: 10px 18px;
+      background: rgba(251, 191, 36, 0.25);
+      border: 2px solid #fbbf24;
+      border-radius: 12px;
+      color: #92400e;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 13px;
+      width: fit-content;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s;
+    }
+    .card-btn:hover { 
+      background: rgba(251, 191, 36, 0.4); 
+      box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+    }
+
+    /* Card Themes - Light Background Adapted */
+    .card-content {
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(22, 163, 74, 0.1));
+      box-shadow: 0 0 30px rgba(34, 197, 94, 0.2), inset 0 0 30px rgba(34, 197, 94, 0.05);
+    }
+    .card-content .card-icon-main { color: #16a34a; }
+
+    .card-cyber {
+      background: linear-gradient(135deg, rgba(220, 38, 38, 0.15), rgba(185, 28, 28, 0.1));
+      box-shadow: 0 0 30px rgba(220, 38, 38, 0.2), inset 0 0 30px rgba(220, 38, 38, 0.05);
+    }
+    .card-cyber .card-icon-main { color: #dc2626; }
+
+    .card-academy {
+      background: linear-gradient(135deg, rgba(234, 179, 8, 0.2), rgba(217, 119, 6, 0.15));
+      box-shadow: 0 0 30px rgba(234, 179, 8, 0.25), inset 0 0 30px rgba(234, 179, 8, 0.08);
+    }
+    .card-academy .card-icon-main { color: #ca8a04; }
+
+    .card-landing {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(37, 99, 235, 0.1));
+      box-shadow: 0 0 30px rgba(59, 130, 246, 0.2), inset 0 0 30px rgba(59, 130, 246, 0.05);
+    }
+    .card-landing .card-icon-main { color: #2563eb; }
+
+    .card-ecommerce {
+      background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(219, 39, 119, 0.1));
+      box-shadow: 0 0 30px rgba(236, 72, 153, 0.2), inset 0 0 30px rgba(236, 72, 153, 0.05);
+    }
+    .card-ecommerce .card-icon-main { color: #db2777; }
+
+    /* ADS Card */
+    .card-ads {
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.25), rgba(234, 179, 8, 0.2));
+      box-shadow: 0 0 40px rgba(251, 191, 36, 0.3), inset 0 0 40px rgba(251, 191, 36, 0.1);
+      border: 3px solid #fbbf24;
+      animation: glow 2s ease-in-out infinite;
+    }
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 30px rgba(251, 191, 36, 0.3); }
+      50% { box-shadow: 0 0 50px rgba(251, 191, 36, 0.5); }
+    }
+    .card-ads .card-icon-main { color: #d97706; }
+    .card-ads h3 { color: #1e293b; }
+    .card-ads p { color: #475569; }
+
+    /* Stats */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      padding: 0 20px;
+      margin-top: 25px;
+    }
+    .stat {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(241, 245, 249, 0.7));
+      padding: 18px 10px;
+      border-radius: 16px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(251, 191, 36, 0.3);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+    .stat .num {
+      font-size: 24px;
+      font-weight: bold;
+      background: linear-gradient(90deg, #f59e0b, #16a34a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .stat .lbl { font-size: 12px; color: #475569; margin-top: 5px; }
+
+    /* Sub-sections */
+    .sub-sections { padding: 0 20px; margin-top: 15px; }
+    .sub-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(241, 245, 249, 0.8));
+      padding: 15px;
+      border-radius: 16px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+    .sub-card:hover { 
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(241, 245, 249, 0.95)); 
+      transform: translateX(-5px);
+      border-color: #fbbf24;
+      box-shadow: 0 4px 15px rgba(251, 191, 36, 0.2);
+    }
+    .sub-card-icon {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    .sub-card-info { flex: 1; }
+    .sub-card-info h4 { font-size: 14px; margin-bottom: 3px; color: #1e293b; }
+    .sub-card-info p { font-size: 12px; color: #64748b; }
+    .sub-card-arrow { color: #f59e0b; font-size: 18px; }
+
+    /* E-commerce Logo Section */
+    .ecommerce-logo-section {
+      margin: 25px 20px;
+      padding: 25px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(241, 245, 249, 0.8));
+      border-radius: 24px;
+      border: 3px solid #fbbf24;
+      backdrop-filter: blur(20px);
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+    .ecommerce-logo {
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, #1e40af, #3b82f6);
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 15px;
+      box-shadow: 0 0 40px rgba(59, 130, 246, 0.4);
+      position: relative;
+      overflow: hidden;
+      border: 3px solid #fbbf24;
+    }
+    .ecommerce-logo::before {
+      content: '';
+      font-size: 50px;
+      z-index: 2;
+    }
+    .ecommerce-logo::after {
+      content: 'P';
+      position: absolute;
+      font-size: 70px;
+      font-weight: bold;
+      color: rgba(255,255,255,0.3);
+      z-index: 1;
+    }
+    .ecommerce-logo-text {
+      color: #475569;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+    }
+    .modal.active { display: flex; }
+    .modal-content {
+      background: linear-gradient(135deg, #ffffff, #f1f5f9);
+      border-radius: 24px;
+      padding: 30px;
+      max-width: 500px;
+      width: 100%;
+      border: 3px solid #fbbf24;
+      box-shadow: 0 0 50px rgba(251, 191, 36, 0.3);
+    }
+    .modal-content h2 {
+      margin-bottom: 15px;
+      background: linear-gradient(90deg, #f59e0b, #16a34a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 26px;
+    }
+    .modal-content p {
+      color: #475569;
+    }
+    .modal-content input, .modal-content textarea, .modal-content select {
+      width: 100%;
+      padding: 12px 15px;
+      margin-bottom: 12px;
+      background: rgba(235, 245, 251, 0.5);
+      border: 2px solid rgba(251, 191, 36, 0.4);
+      border-radius: 12px;
+      color: #1e293b;
+      font-size: 14px;
+      font-family: inherit;
+    }
+    .modal-content input:focus, .modal-content textarea:focus {
+      outline: none;
+      border-color: #fbbf24;
+      background: rgba(235, 245, 251, 0.8);
+      box-shadow: 0 0 15px rgba(251, 191, 36, 0.2);
+    }
+    .modal-content textarea { min-height: 100px; resize: vertical; }
+    .modal-buttons { display: flex; gap: 10px; margin-top: 15px; }
+    .modal-btn {
+      flex: 1;
+      padding: 12px;
+      border-radius: 12px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .modal-btn-primary {
+      background: linear-gradient(135deg, #fbbf24, #22c55e);
+      color: #fff;
+    }
+    .modal-btn-secondary {
+      background: rgba(251, 191, 36, 0.15);
+      color: #92400e;
+      border: 2px solid #fbbf24;
+    }
+
+    /* Bottom Nav */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(241, 245, 249, 0.95));
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      display: flex;
+      justify-content: space-around;
+      padding: 12px 0;
+      border-top: 3px solid #fbbf24;
+      z-index: 99;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+    }
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      color: #64748b;
+      font-size: 11px;
+      cursor: pointer;
+      transition: all 0.3s;
+      padding: 5px 10px;
+    }
+    .nav-item.active { color: #f59e0b; }
+    .nav-item.active .nav-icon { transform: scale(1.2); }
+    .nav-item .nav-icon { font-size: 22px; transition: transform 0.3s; }
+
+    /* Loading Animation */
+    .loading {
+      display: none;
+      text-align: center;
+      padding: 20px;
+    }
+    .loading.active { display: block; }
+    .spinner {
+      width: 40px; height: 40px;
+      border: 3px solid rgba(251, 191, 36, 0.2);
+      border-top-color: #fbbf24;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 10px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <div class="logo-icon">⚡</div>
+      <span>PiNova</span>
+    </div>
+    <div class="header-actions">
+      <button class="icon-btn">🔔</button>
+      <button class="icon-btn">️</button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-badge">✨ الإصدار 2.0 - منصة ذكية متكاملة</div>
+    <h1>PiNova منصة ذكية متكاملة</h1>
+    <p>أدوات الذكاء الاصطناعي، الأمن السيبراني، التجارة الإلكترونية وصناعة المحتوى في مكان واحد</p>
+  </section>
+
+  <!-- Pi Balance -->
+  <div class="pi-balance">
+    <div>
+      <div class="label">رصيد Pi الخاص بك</div>
+      <div class="amount">5,420 π</div>
+    </div>
+    <button class="pi-btn">عرض الصفقات</button>
+  </div>
+
+  <!-- Main Tools - 6 Cards (Including ADS) -->
+  <div class="section-title">🎯 الأدوات الرئيسية</div>
+  <div class="cards-grid">
+
+    <!-- Content Creation -->
+    <div class="card card-content" onclick="openSection('content')">
+      <div>
+        <span class="card-badge">✨ صناعة المحتوى</span>
+        <div class="card-icon-main">✳️</div>
+        <h3>Content Creation</h3>
+        <p>إنشاء محتوى نصي ومرئي وفيديو بالذكاء الاصطناعي</p>
+      </div>
+      <button class="card-btn">ابدأ الإنشاء ←</button>
+    </div>
+
+    <!-- Cybersecurity -->
+    <div class="card card-cyber" onclick="openSection('cyber')">
+      <div>
+        <span class="card-badge">🟢 نشط</span>
+        <div class="card-icon-main">️</div>
+        <h3>Cybersecurity</h3>
+        <p>حماية شاملة للبيانات والعملة الرقمية وأدوات اختبار الاختراق</p>
+      </div>
+      <button class="card-btn">مركز الأمان ←</button>
+    </div>
+
+    <!-- AI & E-commerce Academy -->
+    <div class="card card-academy" onclick="openSection('academy')">
+      <div>
+        <span class="card-badge">🎓 تعليم</span>
+        <div class="card-icon-main">🎓</div>
+        <h3>AI & E-commerce Academy</h3>
+        <p>تعلّم التجارة الإلكترونية والذكاء الاصطناعي من الصفر للاحتراف</p>
+      </div>
+      <button class="card-btn">ابدأ التعلم ←</button>
+    </div>
+
+    <!-- Landing Page Generator -->
+    <div class="card card-landing" onclick="openLandingModal()">
+      <div>
+        <span class="card-badge">🤖 AI Powered</span>
+        <div class="card-icon-main"></div>
+        <h3>توليد صفحات الهبوط</h3>
+        <p>إنشاء صفحات هبوط احترافية بالذكاء الاصطناعي في ثوانٍ</p>
+      </div>
+      <button class="card-btn">ولّد صفحة ←</button>
+    </div>
+
+    <!-- E-commerce Registration -->
+    <div class="card card-ecommerce" onclick="openEcommerceModal()">
+      <div>
+        <span class="card-badge">🏪 متجر</span>
+        <div class="card-icon-main">🛍️</div>
+        <h3>التجارة الإلكترونية</h3>
+        <p>سجل متجرك أو جمعيتك واعرض منتجاتك للعالم</p>
+      </div>
+      <button class="card-btn">سجل الآن ←</button>
+    </div>
+
+    <!-- ADS Platform -->
+    <div class="card card-ads" onclick="openAdsModal()">
+      <div>
+        <span class="card-badge">📢 جديد</span>
+        <div class="card-icon-main"></div>
+        <h3>منصة الإشهار</h3>
+        <p>أطلق إعلانات منتجاتك وخدماتك واصل لآلاف العملاء</p>
+      </div>
+      <button class="card-btn">أنشئ إعلان ←</button>
+    </div>
+
+  </div>
+
+  <!-- E-commerce Logo Section -->
+  <div class="ecommerce-logo-section">
+    <div class="ecommerce-logo"></div>
+    <h3 style="margin-bottom: 10px; color: #1e293b; font-size: 20px;">منصة التجارة الإلكترونية</h3>
+    <p style="color: #64748b; font-size: 14px; margin-bottom: 15px;">
+      للتجار والجمعيات والتعاونيات - أطلق إشهاراتك الآن
+    </p>
+    <button class="card-btn" onclick="openAdsModal()" style="margin: 0 auto; display: block; background: rgba(251, 191, 36, 0.3);">
+      📢 أطلق إعلانك الآن
+    </button>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <div class="num">24</div>
+      <div class="lbl">مشروع نشط</div>
+    </div>
+    <div class="stat">
+      <div class="num">156</div>
+      <div class="lbl">إعلان منشور</div>
+    </div>
+    <div class="stat">
+      <div class="num">89%</div>
+      <div class="lbl">معدل النجاح</div>
+    </div>
+  </div>
+
+  <!-- Academy Sub-sections -->
+  <div class="section-title">📚 مسارات الأكاديمية</div>
+  <div class="sub-sections">
+    <div class="sub-card">
+      <div class="sub-card-icon" style="background: linear-gradient(135deg, #7c3aed, #a855f7);">🛒</div>
+      <div class="sub-card-info">
+        <h4>التجارة الإلكترونية</h4>
+        <p>Dropshipping • Shopify • التسويق الرقمي</p>
+      </div>
+      <div class="sub-card-arrow">←</div>
+    </div>
+    <div class="sub-card">
+      <div class="sub-card-icon" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);">🤖</div>
+      <div class="sub-card-info">
+        <h4>الذكاء الاصطناعي</h4>
+        <p>ChatGPT • Midjourney • الأتمتة</p>
+      </div>
+      <div class="sub-card-arrow">←</div>
+    </div>
+    <div class="sub-card">
+      <div class="sub-card-icon" style="background: linear-gradient(135deg, #22c55e, #16a34a);">📊</div>
+      <div class="sub-card-info">
+        <h4>تحليل البيانات</h4>
+        <p>Python • Excel • Business Intelligence</p>
+      </div>
+      <div class="sub-card-arrow">←</div>
+    </div>
+  </div>
+
+  <!-- Cybersecurity Sub-sections -->
+  <div class="section-title">🔒 أدوات الأمن السيبراني</div>
+  <div class="sub-sections">
+    <div class="sub-card">
+      <div class="sub-card-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626);">🔍</div>
+      <div class="sub-card-info">
+        <h4>فحص الثغرات</h4>
+        <p>اكتشاف نقاط الضعف في أنظمتك</p>
+      </div>
+      <div class="sub-card-arrow">←</div>
+    </div>
+    <div class="sub-card">
+      <div class="sub-card-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">🦠</div>
+      <div class="sub-card-info">
+        <h4>مكافحة الفيروسات</h4>
+        <p>حماية فورية من البرمجيات الخبيثة</p>
+      </div>
+      <div class="sub-card-arrow">←</div>
+    </div>
+    <div class="sub-card">
+      <div class="sub-card-icon" style="background: linear-gradient(135deg, #3b82f6, #2563eb);">🔐</div>
+      <div class="sub-card-info">
+        <h4>أمان الشبكات</h4>
+        <p>تشفير وحماية اتصالاتك</p>
+      </div>
+      <div class="sub-card-arrow">←</div>
+    </div>
+  </div>
+
+  <!-- Content Creation Sub-sections -->
+  <div class="section-title">🎬 صناعة المحتوى</div>
+  <div class="sub-sections">
+    <div class="sub-card">
+      <div class="sub-card-icon" style="background: linear-gradient(135deg, #a855f7, #7c3aed);">✍️</div>
+      <div class="sub-card-info">
+        <h4>AI Writing Assistant</h4>
+        <p>كتابة مقالات ومنشورات بالذكاء الاصطناعي</p>
+      </div>
+      <div class="sub-card-arrow">←</div>
+    </div>
+    <div class="sub-card">
+      <div class="sub-card-icon" style="background: linear-gradient(135deg, #ec4899, #db2777);">🎨</div>
+      <div class="sub-card-info">
+        <h4>Smart Design</h4>
+        <p>تصميم تلقائي ذكي للصور والشعارات</p>
+      </div>
+      <div class="sub-card-arrow">←</div>
+    </div>
+    <div class="sub-card">
+      <div class="sub-card-icon" style="background: linear-gradient(135deg, #f97316, #ea580c);">⚡</div>
+      <div class="sub-card-info">
+        <h4>Quick Generate</h4>
+        <p>إنتاج سريع للمحتوى بنقرة واحدة</p>
+      </div>
+      <div class="sub-card-arrow">←</div>
+    </div>
+  </div>
+
+  <!-- ADS Modal -->
+  <div class="modal" id="adsModal">
+    <div class="modal-content">
+      <h2>📢 منصة الإشهار الذكية</h2>
+      <p style="color: #64748b; margin-bottom: 20px; font-size: 13px;">
+        أطلق إعلانك واصل لآلاف العملاء في المغرب وخارجه
+      </p>
+      
+      <form>
+        <input type="text" placeholder="عنوان الإعلان *" required />
+        <input type="text" placeholder="اسم المتجر / الشركة *" required />
+        
+        <select required>
+          <option value="">فئة الإعلان *</option>
+          <option value="product">منتج</option>
+          <option value="service">خدمة</option>
+          <option value="promotion">عرض ترويجي</option>
+          <option value="event">حدث</option>
+        </select>
+        
+        <textarea placeholder="وصف تفصيلي للإعلان (المنتجات، الخدمات، الأسعار...)" rows="4" required></textarea>
+        
+        <input type="text" placeholder="رابط المنتج / الموقع الإلكتروني" />
+        <input type="tel" placeholder="رقم الهاتف للتواصل *" required />
+        
+        <select required>
+          <option value="">المدة الزمنية للإعلان *</option>
+          <option value="7">أسبوع واحد (7 أيام)</option>
+          <option value="15">15 يوم</option>
+          <option value="30">شهر كامل (30 يوم)</option>
+        </select>
+        
+        <div style="background: rgba(251, 191, 36, 0.15); padding: 15px; border-radius: 12px; margin: 15px 0; border: 2px solid #fbbf24;">
+          <p style="color: #92400e; font-size: 14px; margin: 0;">
+            💰 تكلفة الإعلان: <strong>50 π</strong> (أسبوع) | <strong>100 π</strong> (شهر)
+          </p>
+        </div>
+        
+        <div class="modal-buttons">
+          <button type="submit" class="modal-btn modal-btn-primary">نشر الإعلان</button>
+          <button type="button" class="modal-btn modal-btn-secondary" onclick="closeAdsModal()">إلغاء</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- E-commerce Registration Modal -->
+  <div class="modal" id="ecommerceModal">
+    <div class="modal-content">
+      <h2>🏪 تسجيل متجر إلكتروني</h2>
+      <p style="color: #64748b; margin-bottom: 20px; font-size: 13px;">
+        سجل متجرك أو جمعيتك أو تعاونيتك واعرض منتجاتك للعملاء
+      </p>
+      
+      <form>
+        <input type="text" placeholder="اسم المتجر / الجمعية / التعاونية *" required />
+        <input type="text" placeholder="اسم المالك المسؤول *" required />
+        <input type="email" placeholder="البريد الإلكتروني *" required />
+        <input type="tel" placeholder="رقم الهاتف *" required />
+        
+        <select required>
+          <option value="">نوع النشاط التجاري *</option>
+          <option value="store">متجر إلكتروني</option>
+          <option value="association">جمعية</option>
+          <option value="cooperative">تعاونية</option>
+          <option value="company">شركة</option>
+        </select>
+        
+        <input type="text" placeholder="المجال / النشاط (مثال: ملابس، منتجات طبيعية...)" />
+        <textarea placeholder="وصف مختصر عن منتجاتك أو خدماتك..." rows="3"></textarea>
+        
+        <div class="modal-buttons">
+          <button type="submit" class="modal-btn modal-btn-primary">إرسال الطلب</button>
+          <button type="button" class="modal-btn modal-btn-secondary" onclick="closeEcommerceModal()">إلغاء</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Bottom Nav -->
+  <nav class="bottom-nav">
+    <div class="nav-item active">
+      <span class="nav-icon"></span>
+      <span>الرئيسية</span>
+    </div>
+    <div class="nav-item">
+      <span class="nav-icon">📊</span>
+      <span>الإحصائيات</span>
+    </div>
+    <div class="nav-item">
+      <span class="nav-icon">📢</span>
+      <span>الإشهارات</span>
+    </div>
+    <div class="nav-item">
+      <span class="nav-icon">👤</span>
+      <span>حسابي</span>
+    </div>
+  </nav>
+
+  <script>
+    // Modal Functions
+    function openAdsModal() {
+      document.getElementById('adsModal').classList.add('active');
+    }
+    
+    function closeAdsModal() {
+      document.getElementById('adsModal').classList.remove('active');
+    }
+    
+    function openEcommerceModal() {
+      document.getElementById('ecommerceModal').classList.add('active');
+    }
+    
+    function closeEcommerceModal() {
+      document.getElementById('ecommerceModal').classList.remove('active');
+    }
+    
+    function openSection(section) {
+      alert('سيتم فتح قسم: ' + section);
+    }
+    
+    function openLandingModal() {
+      alert('سيتم فتح مولد صفحات الهبوط');
+    }
+    
+    // Close modal on outside click
+    window.onclick = function(event) {
+      const adsModal = document.getElementById('adsModal');
+      const ecommerceModal = document.getElementById('ecommerceModal');
+      if (event.target == adsModal) {
+        closeAdsModal();
+      }
+      if (event.target == ecommerceModal) {
+        closeEcommerceModal();
+      }
+    }
+  </script>
+</body>
+</html>
