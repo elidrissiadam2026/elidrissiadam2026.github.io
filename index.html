@@ -842,8 +842,67 @@
       if (event.target == ecommerceModal) {
         closeEcommerceModal();
       }
+
+  // دالة المعاملة التجريبية - لإكمال الخطوة 10
+  async function makeTestPayment() {
+    if (typeof Pi === 'undefined') {
+      alert('⚠️ افتح التطبيق من Pi Browser!');
+      return;
     }
+    
+    try {
+      await Pi.init({ version: '2.0', sandbox: true });
+      const scopes = ['payments', 'username'];
+      const auth = await Pi.authenticate(scopes, onIncompletePaymentFound);
+      
+      const paymentData = {
+        amount: 1,
+        memo: 'Test - PiNova Step 10',
+        metadata: { paymentType: 'test' }
+      };
+
+      await Pi.createPayment(paymentData, {
+        onReadyForServerApproval: (paymentId) => {
+          alert('✅ Payment ID: ' + paymentId);
+        },
+        onReadyForServerCompletion: (paymentId, txid) => {
+          alert('✅ تم إكمال المعاملة! TX: ' + txid);
+        },
+        onCancel: () => alert('تم الإلغاء'),
+        onError: (error) => alert('خطأ: ' + error)
+      });
+    } catch (error) {
+      alert('❌ خطأ: ' + error.message);
+    }
+  }
+
+  function onIncompletePaymentFound(payment) {
+    console.log('Incomplete payment:', payment);
+    }
+    }
+
+  
   </script>
+
+  <!-- زر المعاملة التجريبية -->
+  <button onclick="makeTestPayment()" style="
+    position: fixed;
+    bottom: 100px;
+    left: 20px;
+    right: 20px;
+    padding: 15px;
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 98;
+    box-shadow: 0 10px 30px rgba(251, 191, 36, 0.4);
+  ">
+    💳 إجراء معاملة تجريبية (1 Pi)
+  </button>
 </body>
 </html>
 
