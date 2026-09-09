@@ -2,12 +2,14 @@
   publish = "/"
   command = "echo 'No build needed'"
 
-[[headers]]
-  for = "/*"
-  [headers.values]
-    Access-Control-Allow-Origin = "*"
+# السماح بملف التحقق بالوصول المباشر
+[[redirects]]
+  from = "/validation-key.txt"
+  to = "/validation-key.txt"
+  status = 200
+  force = true
 
-# استثناء ملفات .txt من التوجيه
+# السماح بباقي ملفات .txt
 [[redirects]]
   from = "/*.txt"
   to = "/:splat"
