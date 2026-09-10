@@ -930,15 +930,26 @@ function onIncompletePaymentFound(payment) {
         metadata: payment.metadata
       },
       {
-        onReadyForServerApproval: (paymentId) => {
-          console.log('✅ Incomplete payment approved:', paymentId);
+        onReadyForServerApproval: async (paymentId) => {
+    await fetch(`https://api.minepi.com/v2/payments/${paymentId}/approve`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Key ${apiKey}`,
+            'Content-Type': 'application/json'
+        }
+    });
+},
+        onReadyForServerCompletion: async (paymentId, txid) => {
+    await fetch(`https://api.minepi.com/v2/payments/${paymentId}/complete`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Key ${apiKey}`,
+            'Content-Type': 'application/json'
         },
-        onReadyForServerCompletion: (paymentId, txid) => {
-          alert('✅ تم إكمال المعاملة السابقة!\nTX: ' + txid);
-        },
-        onCancel: () => {},
-        onError: (error) => {
-          console.error('Error completing payment:', error);
+        body: JSON.stringify({ txid })
+    });
+    alert('✅ نجحت المعاملة! الخطوة 10 مكتملة!');
+},
         }
       }
     );
@@ -973,7 +984,7 @@ function onIncompletePaymentFound(payment) {
     async function makeTestPayment() {
       // تهيئة SDK
       if (!await initPiSDK()) return;
-      
+      ia2hbrhr3kfpbtyrmttqmmblv16k7ni3fm573phf87agw0g5zgtvmndjnxj7ywnw
       try {
         // المصادقة
         const scopes = ['payments', 'username'];
