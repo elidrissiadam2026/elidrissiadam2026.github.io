@@ -845,38 +845,105 @@
         closeEcommerceModal();
       }
 
-  // دالة المعاملة التجريبية - لإكمال الخطوة 10
-  async function makeTestPayment() {
-    if (typeof Pi === 'undefined') {
-      alert('⚠️ افتح التطبيق من Pi Browser!');
-      return;
-    }
-    
-    try {
-      await Pi.init({ version: '2.0', sandbox: true });
-      const scopes = ['payments', 'username'];
-      const auth = await Pi.authenticate(scopes, onIncompletePaymentFound);
-      
-      const paymentData = {
-        amount: 1,
-        memo: 'Test - PiNova Step 10',
-        metadata: { paymentType: 'test' }
-      };
+  // دالة المعاملة التجريبية - لإكمال الخطوة 1// دالة المعاملة التجريبية - محسّنة وسريعة
+async function makeTestPayment() {
+  // تحقق من Pi SDK
+  if (typeof Pi === 'undefined') {
+    alert('⚠️ Pi SDK غير محمل! افتح من Pi Browser');
+    return;
+  }
 
-      await Pi.createPayment(paymentData, {
+  try {
+    // تهيئة سريعة
+    await Pi.init({ 
+      version: '2.0', 
+      sandbox: true,
+      appId: 'p-9g95'
+    });
+
+    // مصادقة فورية
+    const auth = await Pi.authenticate(
+      ['payments', 'username'], 
+      onIncompletePaymentFound
+    );
+
+    // إنشاء المعاملة
+    await Pi.createPayment(
+      {
+        amount: 1,
+        memo: 'PiNova Step 10 - Test Payment',
+        metadata: { 
+          type: 'test',
+          step: '10',
+          timestamp: Date.now()
+        }
+      },
+      {
+        // موافقة فورية
         onReadyForServerApproval: (paymentId) => {
-          alert('✅ Payment ID: ' + paymentId);
+          console.log('✅ Payment Approved:', paymentId);
+          // لا نعرض alert هنا لتسريع العملية
+        },
+        
+        // إكمال فوري
+        onReadyForServerCompletion: (paymentId, txid) => {
+          console.log('✅ Payment Completed:', txid);
+          
+          // رسالة نجاح سريعة
+          alert('✅ نجحت المعاملة!\n\nPayment ID: ' + paymentId + '\n\nالآن ارجع لـ Developer Portal واضغط Complete على الخطوة 10');
+          
+          // فتح Developer Portal تلقائياً بعد 2 ثانية
+          setTimeout(() => {
+            window.open('https://develop.pi.network', '_blank');
+          }, 2000);
+        },
+        
+        // إلغاء
+        onCancel: (paymentId) => {
+          console.log('️ Payment Cancelled:', paymentId);
+        },
+        
+        // خطأ
+        onError: (error, payment) => {
+          console.error('❌ Payment Error:', error);
+          alert('❌ خطأ: ' + error + '\n\nجرب مرة أخرى!');
+        }
+      }
+    );
+
+  } catch (error) {
+    console.error('❌ Error:', error);
+    alert('❌ خطأ: ' + error.message + '\n\nتأكد من فتح التطبيق من Pi Browser!');
+  }
+}
+
+// معالجة المعاملات غير المكتملة
+function onIncompletePaymentFound(payment) {
+  console.log(' Incomplete payment found:', payment);
+  
+  // محاولة إكمال المعاملة غير المكتملة
+  if (payment && payment.identifier) {
+    Pi.createPayment(
+      {
+        amount: payment.amount,
+        memo: payment.memo,
+        metadata: payment.metadata
+      },
+      {
+        onReadyForServerApproval: (paymentId) => {
+          console.log('✅ Incomplete payment approved:', paymentId);
         },
         onReadyForServerCompletion: (paymentId, txid) => {
-          alert('✅ تم إكمال المعاملة! TX: ' + txid);
+          alert('✅ تم إكمال المعاملة السابقة!\nTX: ' + txid);
         },
-        onCancel: () => alert('تم الإلغاء'),
-        onError: (error) => alert('خطأ: ' + error)
-      });
-    } catch (error) {
-      alert('❌ خطأ: ' + error.message);
-    }
+        onCancel: () => {},
+        onError: (error) => {
+          console.error('Error completing payment:', error);
+        }
+      }
+    );
   }
+}
 
   function onIncompletePaymentFound(payment) {
     console.log('Incomplete payment:', payment);
