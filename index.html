@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
@@ -6,8 +6,6 @@
   <meta name="theme-color" content="#fbbf24" />
   <title>PiNova - منصة ذكية متكاملة</title>
 
-  <!-- Pi Network SDK
-       يتم تحميله بشكل غير متزامن حتى لا يمنع ظهور واجهة التطبيق -->
   <script
     src="https://sdk.minepi.com/pi-sdk.js"
     async
@@ -42,34 +40,17 @@
       right: 0;
       bottom: 0;
       background:
-        radial-gradient(
-          circle at 20% 30%,
-          rgba(34, 197, 94, 0.08) 0%,
-          transparent 50%
-        ),
-        radial-gradient(
-          circle at 80% 70%,
-          rgba(251, 191, 36, 0.08) 0%,
-          transparent 50%
-        ),
-        radial-gradient(
-          circle at 50% 50%,
-          rgba(59, 130, 246, 0.05) 0%,
-          transparent 50%
-        );
+        radial-gradient(circle at 20% 30%, rgba(34, 197, 94, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(251, 191, 36, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
       z-index: -1;
       animation: pulse 8s ease-in-out infinite;
       pointer-events: none;
     }
 
     @keyframes pulse {
-      0%, 100% {
-        opacity: 0.6;
-      }
-
-      50% {
-        opacity: 1;
-      }
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
     }
 
     header {
@@ -77,18 +58,14 @@
       justify-content: space-between;
       align-items: center;
       padding: 15px 20px;
-      background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.95),
-        rgba(241, 245, 249, 0.95)
-      );
+      background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(241,245,249,0.95));
       backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      -webkit-backbackdrop-filter: blur(20px);
       position: sticky;
       top: 0;
       z-index: 100;
       border-bottom: 3px solid #fbbf24;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     }
 
     .logo {
@@ -109,7 +86,7 @@
       align-items: center;
       justify-content: center;
       font-size: 22px;
-      box-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
+      box-shadow: 0 0 20px rgba(251,191,36,0.6);
     }
 
     .header-actions {
@@ -120,7 +97,7 @@
     .icon-btn {
       width: 40px;
       height: 40px;
-      background: rgba(251, 191, 36, 0.15);
+      background: rgba(251,191,36,0.15);
       border-radius: 50%;
       border: 2px solid #fbbf24;
       color: #f59e0b;
@@ -130,9 +107,9 @@
     }
 
     .icon-btn:hover {
-      background: rgba(251, 191, 36, 0.3);
+      background: rgba(251,191,36,0.3);
       transform: scale(1.1);
-      box-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
+      box-shadow: 0 0 15px rgba(251,191,36,0.4);
     }
 
     .hero {
@@ -143,11 +120,7 @@
     .hero-badge {
       display: inline-block;
       padding: 8px 20px;
-      background: linear-gradient(
-        135deg,
-        rgba(251, 191, 36, 0.2),
-        rgba(234, 179, 8, 0.15)
-      );
+      background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(234,179,8,0.15));
       border: 2px solid #fbbf24;
       border-radius: 25px;
       font-size: 13px;
@@ -159,12 +132,7 @@
     .hero h1 {
       font-size: 32px;
       margin-bottom: 10px;
-      background: linear-gradient(
-        90deg,
-        #f59e0b,
-        #d97706,
-        #16a34a
-      );
+      background: linear-gradient(90deg, #f59e0b, #d97706, #16a34a);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -174,51 +142,6 @@
       color: #475569;
       font-size: 15px;
       line-height: 1.6;
-    }
-
-    .pi-balance {
-      margin: 20px;
-      padding: 20px;
-      background: linear-gradient(
-        135deg,
-        #f59e0b,
-        #d97706
-      );
-      border-radius: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);
-      border: 2px solid #fbbf24;
-    }
-
-    .pi-balance .amount {
-      font-size: 26px;
-      font-weight: bold;
-      color: #fff;
-    }
-
-    .pi-balance .label {
-      font-size: 13px;
-      opacity: 0.95;
-      color: #fef3c7;
-    }
-
-    .pi-btn {
-      padding: 10px 20px;
-      background: rgba(255, 255, 255, 0.3);
-      border-radius: 12px;
-      border: 2px solid #fff;
-      color: #fff;
-      font-weight: bold;
-      cursor: pointer;
-      backdrop-filter: blur(10px);
-      transition: all 0.3s;
-    }
-
-    .pi-btn:hover {
-      background: rgba(255, 255, 255, 0.4);
-      transform: scale(1.05);
     }
 
     .section-title {
@@ -236,13 +159,9 @@
       content: '';
       width: 5px;
       height: 28px;
-      background: linear-gradient(
-        180deg,
-        #fbbf24,
-        #22c55e
-      );
+      background: linear-gradient(180deg, #fbbf24, #22c55e);
       border-radius: 3px;
-      box-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+      box-shadow: 0 0 10px rgba(251,191,36,0.5);
     }
 
     .cards-grid {
@@ -267,7 +186,7 @@
       transition: all 0.4s;
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 2px solid rgba(251, 191, 36, 0.3);
+      border: 2px solid rgba(251,191,36,0.3);
       min-height: 200px;
       display: flex;
       flex-direction: column;
@@ -276,7 +195,7 @@
 
     .card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
     }
 
     .card-badge {
@@ -286,7 +205,7 @@
       font-size: 11px;
       font-weight: bold;
       margin-bottom: 12px;
-      background: rgba(251, 191, 36, 0.25);
+      background: rgba(251,191,36,0.25);
       border: 1px solid #fbbf24;
       color: #92400e;
       width: fit-content;
@@ -315,7 +234,7 @@
 
     .card-btn {
       padding: 10px 18px;
-      background: rgba(251, 191, 36, 0.25);
+      background: rgba(251,191,36,0.25);
       border: 2px solid #fbbf24;
       border-radius: 12px;
       color: #92400e;
@@ -328,291 +247,89 @@
     }
 
     .card-btn:hover {
-      background: rgba(251, 191, 36, 0.4);
-      box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+      background: rgba(251,191,36,0.4);
+      box-shadow: 0 0 20px rgba(251,191,36,0.3);
     }
 
     .card-content {
-      background: linear-gradient(
-        135deg,
-        rgba(34, 197, 94, 0.15),
-        rgba(22, 163, 74, 0.1)
-      );
-      box-shadow:
-        0 0 30px rgba(34, 197, 94, 0.2),
-        inset 0 0 30px rgba(34, 197, 94, 0.05);
+      background: linear-gradient(135deg, rgba(34,197,94,0.15), rgba(22,163,74,0.1));
+      box-shadow: 0 0 30px rgba(34,197,94,0.2), inset 0 0 30px rgba(34,197,94,0.05);
     }
-
-    .card-content .card-icon-main {
-      color: #16a34a;
-    }
+    .card-content .card-icon-main { color: #16a34a; }
 
     .card-cyber {
-      background: linear-gradient(
-        135deg,
-        rgba(220, 38, 38, 0.15),
-        rgba(185, 28, 28, 0.1)
-      );
-      box-shadow:
-        0 0 30px rgba(220, 38, 38, 0.2),
-        inset 0 0 30px rgba(220, 38, 38, 0.05);
+      background: linear-gradient(135deg, rgba(220,38,38,0.15), rgba(185,28,28,0.1));
+      box-shadow: 0 0 30px rgba(220,38,38,0.2), inset 0 0 30px rgba(220,38,38,0.05);
     }
-
-    .card-cyber .card-icon-main {
-      color: #dc2626;
-    }
+    .card-cyber .card-icon-main { color: #dc2626; }
 
     .card-academy {
-      background: linear-gradient(
-        135deg,
-        rgba(234, 179, 8, 0.2),
-        rgba(217, 119, 6, 0.15)
-      );
-      box-shadow:
-        0 0 30px rgba(234, 179, 8, 0.25),
-        inset 0 0 30px rgba(234, 179, 8, 0.08);
+      background: linear-gradient(135deg, rgba(234,179,8,0.2), rgba(217,119,6,0.15));
+      box-shadow: 0 0 30px rgba(234,179,8,0.25), inset 0 0 30px rgba(234,179,8,0.08);
     }
-
-    .card-academy .card-icon-main {
-      color: #ca8a04;
-    }
+    .card-academy .card-icon-main { color: #ca8a04; }
 
     .card-landing {
-      background: linear-gradient(
-        135deg,
-        rgba(59, 130, 246, 0.15),
-        rgba(37, 99, 235, 0.1)
-      );
-      box-shadow:
-        0 0 30px rgba(59, 130, 246, 0.2),
-        inset 0 0 30px rgba(59, 130, 246, 0.05);
+      background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(37,99,235,0.1));
+      box-shadow: 0 0 30px rgba(59,130,246,0.2), inset 0 0 30px rgba(59,130,246,0.05);
     }
-
-    .card-landing .card-icon-main {
-      color: #2563eb;
-    }
+    .card-landing .card-icon-main { color: #2563eb; }
 
     .card-ecommerce {
-      background: linear-gradient(
-        135deg,
-        rgba(236, 72, 153, 0.15),
-        rgba(219, 39, 119, 0.1)
-      );
-      box-shadow:
-        0 0 30px rgba(236, 72, 153, 0.2),
-        inset 0 0 30px rgba(236, 72, 153, 0.05);
+      background: linear-gradient(135deg, rgba(236,72,153,0.15), rgba(219,39,119,0.1));
+      box-shadow: 0 0 30px rgba(236,72,153,0.2), inset 0 0 30px rgba(236,72,153,0.05);
     }
-
-    .card-ecommerce .card-icon-main {
-      color: #db2777;
-    }
+    .card-ecommerce .card-icon-main { color: #db2777; }
 
     .card-ads {
-      background: linear-gradient(
-        135deg,
-        rgba(251, 191, 36, 0.25),
-        rgba(234, 179, 8, 0.2)
-      );
-      box-shadow:
-        0 0 40px rgba(251, 191, 36, 0.3),
-        inset 0 0 40px rgba(251, 191, 36, 0.1);
+      background: linear-gradient(135deg, rgba(251,191,36,0.25), rgba(234,179,8,0.2));
+      box-shadow: 0 0 40px rgba(251,191,36,0.3), inset 0 0 40px rgba(251,191,36,0.1);
       border: 3px solid #fbbf24;
       animation: glow 2s ease-in-out infinite;
     }
 
     @keyframes glow {
-      0%, 100% {
-        box-shadow: 0 0 30px rgba(251, 191, 36, 0.3);
-      }
-
-      50% {
-        box-shadow: 0 0 50px rgba(251, 191, 36, 0.5);
-      }
+      0%, 100% { box-shadow: 0 0 30px rgba(251,191,36,0.3); }
+      50% { box-shadow: 0 0 50px rgba(251,191,36,0.5); }
     }
-
-    .card-ads .card-icon-main {
-      color: #d97706;
-    }
-
-    .card-ads h3 {
-      color: #1e293b;
-    }
-
-    .card-ads p {
-      color: #475569;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      padding: 0 20px;
-      margin-top: 25px;
-    }
-
-    .stat {
-      background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.7),
-        rgba(241, 245, 249, 0.7)
-      );
-      padding: 18px 10px;
-      border-radius: 16px;
-      text-align: center;
-      backdrop-filter: blur(10px);
-      border: 2px solid rgba(251, 191, 36, 0.3);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    }
-
-    .stat .num {
-      font-size: 24px;
-      font-weight: bold;
-      background: linear-gradient(
-        90deg,
-        #f59e0b,
-        #16a34a
-      );
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .stat .lbl {
-      font-size: 12px;
-      color: #475569;
-      margin-top: 5px;
-    }
-
-    .sub-sections {
-      padding: 0 20px;
-      margin-top: 15px;
-    }
-
-    .sub-card {
-      background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.8),
-        rgba(241, 245, 249, 0.8)
-      );
-      padding: 15px;
-      border-radius: 16px;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      border: 1px solid rgba(251, 191, 36, 0.3);
-      backdrop-filter: blur(10px);
-      transition: all 0.3s;
-      cursor: pointer;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    }
-
-    .sub-card:hover {
-      background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.95),
-        rgba(241, 245, 249, 0.95)
-      );
-      transform: translateX(-5px);
-      border-color: #fbbf24;
-      box-shadow: 0 4px 15px rgba(251, 191, 36, 0.2);
-    }
-
-    .sub-card-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      flex-shrink: 0;
-    }
-
-    .sub-card-info {
-      flex: 1;
-    }
-
-    .sub-card-info h4 {
-      font-size: 14px;
-      margin-bottom: 3px;
-      color: #1e293b;
-    }
-
-    .sub-card-info p {
-      font-size: 12px;
-      color: #64748b;
-    }
-
-    .sub-card-arrow {
-      color: #f59e0b;
-      font-size: 18px;
-    }
+    .card-ads .card-icon-main { color: #d97706; }
+    .card-ads h3 { color: #1e293b; }
+    .card-ads p { color: #475569; }
 
     .ecommerce-logo-section {
       margin: 25px 20px;
       padding: 25px;
-      background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.8),
-        rgba(241, 245, 249, 0.8)
-      );
+      background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(241,245,249,0.8));
       border-radius: 24px;
       border: 3px solid #fbbf24;
       backdrop-filter: blur(20px);
       text-align: center;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
     }
 
     .ecommerce-logo {
       width: 120px;
       height: 120px;
-      background: linear-gradient(
-        135deg,
-        #1e40af,
-        #3b82f6
-      );
+      background: linear-gradient(135deg, #1e40af, #3b82f6);
       border-radius: 24px;
       display: flex;
       align-items: center;
       justify-content: center;
       margin: 0 auto 15px;
-      box-shadow: 0 0 40px rgba(59, 130, 246, 0.4);
+      box-shadow: 0 0 40px rgba(59,130,246,0.4);
       position: relative;
       overflow: hidden;
       border: 3px solid #fbbf24;
     }
-
-    .ecommerce-logo::before {
-      content: '🛒';
-      font-size: 50px;
-      z-index: 2;
-    }
-
-    .ecommerce-logo::after {
-      content: 'P';
-      position: absolute;
-      font-size: 70px;
-      font-weight: bold;
-      color: rgba(255, 255, 255, 0.3);
-      z-index: 1;
-    }
-
-    .ecommerce-logo-text {
-      color: #475569;
-      font-size: 14px;
-      margin-top: 10px;
-    }
+    .ecommerce-logo::before { content: '🛒'; font-size: 50px; z-index: 2; }
+    .ecommerce-logo::after { content: 'P'; position: absolute; font-size: 70px; font-weight: bold; color: rgba(255,255,255,0.3); z-index: 1; }
 
     .bottom-nav {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
-      background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.95),
-        rgba(241, 245, 249, 0.95)
-      );
+      background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(241,245,249,0.95));
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       display: flex;
@@ -620,7 +337,7 @@
       padding: 12px 0;
       border-top: 3px solid #fbbf24;
       z-index: 99;
-      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
     }
 
     .nav-item {
@@ -634,54 +351,44 @@
       transition: all 0.3s;
       padding: 5px 10px;
     }
+    .nav-item.active { color: #f59e0b; }
+    .nav-item.active .nav-icon { transform: scale(1.2); }
+    .nav-item .nav-icon { font-size: 22px; transition: transform 0.3s; }
 
-    .nav-item.active {
-      color: #f59e0b;
-    }
-
-    .nav-item.active .nav-icon {
-      transform: scale(1.2);
-    }
-
-    .nav-item .nav-icon {
-      font-size: 22px;
-      transition: transform 0.3s;
-    }
-
-    .test-payment-btn {
+    /* زر إجراء معاملة بالبطاقة - الخلفية كاملة بالبرتقالي */
+    .card-payment-btn {
       position: fixed;
       bottom: 75px;
       left: 50%;
       transform: translateX(-50%);
       width: 90%;
       max-width: 400px;
-      padding: 15px;
-      background: linear-gradient(
-        135deg,
-        #22c55e,
-        #16a34a
-      );
+      padding: 16px;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
       color: white;
-      border: none;
+      border: 2px solid #fbbf24;
       border-radius: 15px;
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
       z-index: 1000;
-      box-shadow: 0 10px 30px rgba(34, 197, 94, 0.4);
+      box-shadow: 0 10px 30px rgba(245,158,11,0.5);
       transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
 
-    .test-payment-btn:hover {
+    .card-payment-btn:hover {
       transform: translateX(-50%) translateY(-3px);
-      box-shadow: 0 15px 40px rgba(34, 197, 94, 0.5);
+      box-shadow: 0 15px 40px rgba(245,158,11,0.6);
     }
 
-    .test-payment-btn:active {
+    .card-payment-btn:active {
       transform: translateX(-50%) scale(0.98);
     }
 
-    /* رسالة خطأ صغيرة فقط عند الحاجة، ولا تؤثر على تصميم التطبيق */
     .system-message {
       position: fixed;
       top: 70px;
@@ -692,7 +399,7 @@
       max-width: 90%;
       padding: 8px 14px;
       border-radius: 12px;
-      background: rgba(30, 41, 59, 0.92);
+      background: rgba(30,41,59,0.92);
       color: #fff;
       font-size: 11px;
       text-align: center;
@@ -709,1379 +416,159 @@
     <div class="logo">
       <div class="logo-icon">⚡</div>
       <span>PiNova</span>
-
-      <span
-        id="pi-status"
-        style="
-          font-size:10px;
-          margin-right:6px;
-          color:#64748b;
-          font-weight:600;
-        "
-      >
+      <span id="pi-status" style="font-size:10px; margin-right:6px; color:#64748b; font-weight:600;">
         جاري تشغيل التطبيق...
       </span>
     </div>
-
     <div class="header-actions">
-      <button
-        class="icon-btn"
-        type="button"
-        aria-label="الإشعارات"
-      >
-        🔔
-      </button>
-
-      <button
-        class="icon-btn"
-        type="button"
-        aria-label="حساب Pi"
-      >
-        👤
-      </button>
+      <button class="icon-btn" type="button" aria-label="الإشعارات">🔔</button>
+      <button class="icon-btn" type="button" aria-label="حساب Pi">👤</button>
     </div>
   </header>
 
   <section class="hero">
-    <div class="hero-badge">
-      ✨ الإصدار 2.0 - منصة ذكية متكاملة
-    </div>
-
-    <h1>
-      PiNova منصة ذكية متكاملة
-    </h1>
-
-    <p>
-      أدوات الذكاء الاصطناعي، الأمن السيبراني،
-      التجارة الإلكترونية وصناعة المحتوى في مكان واحد
-    </p>
+    <div class="hero-badge">✨ الإصدار 2.0 - منصة ذكية متكاملة</div>
+    <h1>PiNova منصة ذكية متكاملة</h1>
+    <p>أدوات الذكاء الاصطناعي، الأمن السيبراني، التجارة الإلكترونية وصناعة المحتوى في مكان واحد</p>
   </section>
 
-  <div class="pi-balance">
-    <div>
-      <div class="label">
-        رصيد Pi الخاص بك
-      </div>
+  <!-- تم حذف قسم pi-balance (رصيد Pi + عرض الصفقات) -->
 
-      <div class="amount">
-        5,420 π
-      </div>
-    </div>
-
-    <button
-      class="pi-btn"
-      type="button"
-      onclick="openModal('الصفقات')"
-    >
-      عرض الصفقات
-    </button>
-  </div>
-
-  <div class="section-title">
-    🎯 الأدوات الرئيسية
-  </div>
+  <div class="section-title">🎯 الأدوات الرئيسية</div>
 
   <div class="cards-grid">
 
-    <div
-      class="card card-content"
-      onclick="openSection('content')"
-    >
+    <div class="card card-content" onclick="openSection('content')">
       <div>
-        <span class="card-badge">
-          ✨ صناعة المحتوى
-        </span>
-
-        <div class="card-icon-main">
-          ✳️
-        </div>
-
-        <h3>
-          Content Creation
-        </h3>
-
-        <p>
-          إنشاء محتوى نصي ومرئي وفيديو بالذكاء الاصطناعي
-        </p>
+        <span class="card-badge">✨ صناعة المحتوى</span>
+        <div class="card-icon-main">✳️</div>
+        <h3>Content Creation</h3>
+        <p>إنشاء محتوى نصي ومرئي وفيديو بالذكاء الاصطناعي</p>
       </div>
-
-      <button
-        class="card-btn"
-        type="button"
-        onclick="event.stopPropagation(); openSection('content')"
-      >
+      <button class="card-btn" type="button" onclick="event.stopPropagation(); openSection('content')">
         ابدأ الإنشاء ←
       </button>
     </div>
 
-
-    <div
-      class="card card-cyber"
-      onclick="openSection('cyber')"
-    >
+    <div class="card card-cyber" onclick="openSection('cyber')">
       <div>
-        <span class="card-badge">
-          🟢 نشط
-        </span>
-
-        <div class="card-icon-main">
-          🛡️
-        </div>
-
-        <h3>
-          Cybersecurity
-        </h3>
-
-        <p>
-          حماية شاملة للبيانات والعملة الرقمية وأدوات اختبار الاختراق
-        </p>
+        <span class="card-badge">🟢 نشط</span>
+        <div class="card-icon-main">🛡️</div>
+        <h3>Cybersecurity</h3>
+        <p>حماية شاملة للبيانات والعملة الرقمية وأدوات اختبار الاختراق</p>
       </div>
-
-      <button
-        class="card-btn"
-        type="button"
-        onclick="event.stopPropagation(); openSection('cyber')"
-      >
+      <button class="card-btn" type="button" onclick="event.stopPropagation(); openSection('cyber')">
         مركز الأمان ←
       </button>
     </div>
 
-
-    <div
-      class="card card-academy"
-      onclick="openSection('academy')"
-    >
+    <div class="card card-academy" onclick="openSection('academy')">
       <div>
-        <span class="card-badge">
-          🎓 تعليم
-        </span>
-
-        <div class="card-icon-main">
-          🎓
-        </div>
-
-        <h3>
-          AI & E-commerce Academy
-        </h3>
-
-        <p>
-          تعلّم التجارة الإلكترونية والذكاء الاصطناعي من الصفر للاحتراف
-        </p>
+        <span class="card-badge"> تعليم</span>
+        <div class="card-icon-main">🎓</div>
+        <h3>AI & E-commerce Academy</h3>
+        <p>تعلّم التجارة الإلكترونية والذكاء الاصطناعي من الصفر للاحتراف</p>
       </div>
-
-      <button
-        class="card-btn"
-        type="button"
-        onclick="event.stopPropagation(); openSection('academy')"
-      >
+      <button class="card-btn" type="button" onclick="event.stopPropagation(); openSection('academy')">
         ابدأ التعلم ←
       </button>
     </div>
 
-
-    <div
-      class="card card-landing"
-      onclick="openModal('توليد صفحات الهبوط')"
-    >
+    <div class="card card-landing" onclick="openModal('توليد صفحات الهبوط')">
       <div>
-        <span class="card-badge">
-          🤖 AI Powered
-        </span>
-
-        <div class="card-icon-main">
-          🌐
-        </div>
-
-        <h3>
-          توليد صفحات الهبوط
-        </h3>
-
-        <p>
-          إنشاء صفحات هبوط احترافية بالذكاء الاصطناعي في ثوانٍ
-        </p>
+        <span class="card-badge">🤖 AI Powered</span>
+        <div class="card-icon-main">🌐</div>
+        <h3>توليد صفحات الهبوط</h3>
+        <p>إنشاء صفحات هبوط احترافية بالذكاء الاصطناعي في ثوانٍ</p>
       </div>
-
-      <button
-        class="card-btn"
-        type="button"
-        onclick="event.stopPropagation(); openModal('توليد صفحات الهبوط')"
-      >
+      <button class="card-btn" type="button" onclick="event.stopPropagation(); openModal('توليد صفحات الهبوط')">
         ولّد صفحة ←
       </button>
     </div>
 
-
-    <div
-      class="card card-ecommerce"
-      onclick="openModal('التجارة الإلكترونية')"
-    >
+    <div class="card card-ecommerce" onclick="openModal('التجارة الإلكترونية')">
       <div>
-        <span class="card-badge">
-          🏪 متجر
-        </span>
-
-        <div class="card-icon-main">
-          🛍️
-        </div>
-
-        <h3>
-          التجارة الإلكترونية
-        </h3>
-
-        <p>
-          سجل متجرك أو جمعيتك واعرض منتجاتك للعالم
-        </p>
+        <span class="card-badge">🏪 متجر</span>
+        <div class="card-icon-main">🛍️</div>
+        <h3>التجارة الإلكترونية</h3>
+        <p>سجل متجرك أو جمعيتك واعرض منتجاتك للعالم</p>
       </div>
-
-      <button
-        class="card-btn"
-        type="button"
-        onclick="event.stopPropagation(); openModal('التجارة الإلكترونية')"
-      >
+      <button class="card-btn" type="button" onclick="event.stopPropagation(); openModal('التجارة الإلكترونية')">
         سجل الآن ←
       </button>
     </div>
 
-
-    <div
-      class="card card-ads"
-      onclick="openModal('منصة الإشهار')"
-    >
+    <div class="card card-ads" onclick="openModal('منصة الإشهار')">
       <div>
-        <span class="card-badge">
-          📢 جديد
-        </span>
-
-        <div class="card-icon-main">
-          📢
-        </div>
-
-        <h3>
-          منصة الإشهار
-        </h3>
-
-        <p>
-          أطلق إعلانات منتجاتك وخدماتك واصل لآلاف العملاء
-        </p>
+        <span class="card-badge">📢 جديد</span>
+        <div class="card-icon-main"></div>
+        <h3>منصة الإشهار</h3>
+        <p>أطلق إعلانات منتجاتك وخدماتك واصل لآلاف العملاء</p>
       </div>
-
-      <button
-        class="card-btn"
-        type="button"
-        onclick="event.stopPropagation(); openModal('منصة الإشهار')"
-      >
+      <button class="card-btn" type="button" onclick="event.stopPropagation(); openModal('منصة الإشهار')">
         أنشئ إعلان ←
       </button>
     </div>
 
   </div>
 
-
   <div class="ecommerce-logo-section">
-
     <div class="ecommerce-logo"></div>
-
-    <h3
-      style="
-        margin-bottom:10px;
-        color:#1e293b;
-        font-size:20px;
-      "
-    >
-      منصة التجارة الإلكترونية
-    </h3>
-
-    <p
-      style="
-        color:#64748b;
-        font-size:14px;
-        margin-bottom:15px;
-      "
-    >
-      للتجار والجمعيات والتعاونيات - أطلق إشهاراتك الآن
-    </p>
-
-    <button
-      class="card-btn"
-      type="button"
-      onclick="openModal('إطلاق إعلان')"
-      style="
-        margin:0 auto;
-        display:block;
-        background:rgba(251,191,36,0.3);
-      "
-    >
-      📢 أطلق إعلانك الآن
-    </button>
-
+    <h3 style="margin-bottom:10px; color:#1e293b; font-size:20px;">PiNova Store</h3>
+    <p style="color:#475569; font-size:14px;">منصتك المتكاملة للتجارة الإلكترونية</p>
   </div>
 
-
-  <div class="stats">
-
-    <div class="stat">
-      <div class="num">24</div>
-      <div class="lbl">مشروع نشط</div>
-    </div>
-
-    <div class="stat">
-      <div class="num">156</div>
-      <div class="lbl">إعلان منشور</div>
-    </div>
-
-    <div class="stat">
-      <div class="num">89%</div>
-      <div class="lbl">معدل النجاح</div>
-    </div>
-
-  </div>
-
-
-  <div class="section-title">
-    📚 مسارات الأكاديمية
-  </div>
-
-
-  <div class="sub-sections">
-
-    <div
-      class="sub-card"
-      onclick="openModal('التجارة الإلكترونية')"
-    >
-      <div
-        class="sub-card-icon"
-        style="
-          background:linear-gradient(135deg,#7c3aed,#a855f7);
-        "
-      >
-        🛒
-      </div>
-
-      <div class="sub-card-info">
-        <h4>
-          التجارة الإلكترونية
-        </h4>
-
-        <p>
-          Dropshipping • Shopify • التسويق الرقمي
-        </p>
-      </div>
-
-      <div class="sub-card-arrow">
-        ←
-      </div>
-    </div>
-
-
-    <div
-      class="sub-card"
-      onclick="openModal('الذكاء الاصطناعي')"
-    >
-      <div
-        class="sub-card-icon"
-        style="
-          background:linear-gradient(135deg,#fbbf24,#f59e0b);
-        "
-      >
-        🤖
-      </div>
-
-      <div class="sub-card-info">
-        <h4>
-          الذكاء الاصطناعي
-        </h4>
-
-        <p>
-          ChatGPT • Midjourney • الأتمتة
-        </p>
-      </div>
-
-      <div class="sub-card-arrow">
-        ←
-      </div>
-    </div>
-
-
-    <div
-      class="sub-card"
-      onclick="openModal('تحليل البيانات')"
-    >
-      <div
-        class="sub-card-icon"
-        style="
-          background:linear-gradient(135deg,#22c55e,#16a34a);
-        "
-      >
-        📊
-      </div>
-
-      <div class="sub-card-info">
-        <h4>
-          تحليل البيانات
-        </h4>
-
-        <p>
-          Python • Excel • Business Intelligence
-        </p>
-      </div>
-
-      <div class="sub-card-arrow">
-        ←
-      </div>
-    </div>
-
-  </div>
-
-
-  <button
-    class="test-payment-btn"
-    type="button"
-    onclick="makeTestPayment()"
-  >
-    💳 إجراء معاملة تجريبية (1 Pi) - إكمال المرحلة 10
+  <!-- زر إجراء معاملة بالبطاقة فقط (الخلفية كاملة بالبرتقالي) -->
+  <button class="card-payment-btn" type="button" onclick="processCardPayment()">
+    💳 إجراء معاملة بالبطاقة
   </button>
 
-
   <nav class="bottom-nav">
-
-    <div
-      class="nav-item active"
-      onclick="setActiveNav(this)"
-    >
-      <div class="nav-icon">🏠</div>
-      <div>الرئيسية</div>
+    <div class="nav-item active">
+      <span class="nav-icon"></span>
+      <span>الرئيسية</span>
     </div>
-
-    <div
-      class="nav-item"
-      onclick="setActiveNav(this)"
-    >
-      <div class="nav-icon">🔍</div>
-      <div>استكشاف</div>
+    <div class="nav-item">
+      <span class="nav-icon">📊</span>
+      <span>الإحصائيات</span>
     </div>
-
-    <div
-      class="nav-item"
-      onclick="setActiveNav(this)"
-    >
-      <div class="nav-icon">💼</div>
-      <div>محفظتي</div>
+    <div class="nav-item">
+      <span class="nav-icon">📢</span>
+      <span>الإشهارات</span>
     </div>
-
-    <div
-      class="nav-item"
-      onclick="setActiveNav(this)"
-    >
-      <div class="nav-icon">⚙️</div>
-      <div>الإعدادات</div>
+    <div class="nav-item">
+      <span class="nav-icon">👤</span>
+      <span>حسابي</span>
     </div>
-
   </nav>
 
-
   <script>
-    /*
-      ============================================================
-      PiNova - Pi Network Integration
-      ============================================================
-
-      ملاحظات:
-      1. الواجهة لا تعتمد على Pi SDK لكي تظهر.
-      2. يتم تحميل Pi SDK في الخلفية.
-      3. فشل SDK لا يؤدي إلى شاشة بيضاء.
-      4. sandbox=true فقط عند تشغيل نسخة Sandbox.
-      5. لا يوجد Pi API Key داخل index.html.
-    */
-
-    const PINOVA_CONFIG = Object.freeze({
-      sdkVersion: "2.0",
-
-      sandbox:
-        new URLSearchParams(window.location.search).get("sandbox") === "1",
-
-      backendBase: "",
-
-      paymentAmount: 1,
-
-      paymentMemo:
-        "PiNova Step 10 Completion Test"
-    });
-
-
-    let piReady = false;
-    let piAuth = null;
-    let piInitStarted = false;
-
-
-    /*
-      ------------------------------------------------------------
-      أدوات عامة
-      ------------------------------------------------------------
-    */
-
-    function setPiStatus(
-      text,
-      color = "#64748b"
-    ) {
-      const el =
-        document.getElementById("pi-status");
-
-      if (!el) {
-        return;
-      }
-
-      el.textContent = text;
-      el.style.color = color;
+    function openSection(section) {
+      alert('فتح قسم: ' + section);
     }
 
-
-    function showSystemMessage(
-      text,
-      duration = 4000
-    ) {
-      const el =
-        document.getElementById("system-message");
-
-      if (!el) {
-        return;
-      }
-
-      el.textContent = text;
-      el.style.display = "block";
-
-      clearTimeout(
-        showSystemMessage.timer
-      );
-
-      showSystemMessage.timer =
-        setTimeout(() => {
-          el.style.display = "none";
-        }, duration);
+    function openModal(title) {
+      alert('فتح: ' + title);
     }
 
-
-    function backendUrl(path) {
-      return (
-        PINOVA_CONFIG.backendBase +
-        path
-      );
+    function processCardPayment() {
+      alert('جاري إجراء معاملة بالبطاقة...');
     }
 
-
-    /*
-      ------------------------------------------------------------
-      انتظار Pi SDK
-      ------------------------------------------------------------
-    */
-
-    function waitForPiSDK(
-      timeoutMs = 15000
-    ) {
-      return new Promise(
-        (resolve, reject) => {
-
-          const started =
-            Date.now();
-
-          const timer =
-            setInterval(() => {
-
-              if (
-                typeof window.Pi !==
-                "undefined"
-              ) {
-                clearInterval(timer);
-                resolve(window.Pi);
-                return;
-              }
-
-
-              if (
-                Date.now() - started >=
-                timeoutMs
-              ) {
-                clearInterval(timer);
-
-                reject(
-                  new Error(
-                    "Pi SDK لم يتم تحميله في الوقت المحدد."
-                  )
-                );
-              }
-
-            }, 100);
+    // تهيئة Pi SDK
+    if (window.PiNetwork) {
+      PiNetwork.init({
+        onReady: function() {
+          document.getElementById('pi-status').textContent = 'متصل';
+          document.getElementById('pi-status').style.color = '#16a34a';
+        },
+        onError: function(error) {
+          document.getElementById('pi-status').textContent = 'خطأ';
+          document.getElementById('pi-status').style.color = '#dc2626';
         }
-      );
+      });
     }
-
-
-    /*
-      ------------------------------------------------------------
-      تهيئة Pi
-      ------------------------------------------------------------
-    */
-
-    async function initPi() {
-
-      if (piReady) {
-        return true;
-      }
-
-
-      if (piInitStarted) {
-        return piReady;
-      }
-
-
-      piInitStarted = true;
-
-
-      try {
-
-        setPiStatus(
-          "جاري الاتصال بـ Pi...",
-          "#d97706"
-        );
-
-
-        const PiSDK =
-          await waitForPiSDK(15000);
-
-
-        if (
-          !PiSDK ||
-          typeof PiSDK.init !==
-          "function"
-        ) {
-          throw new Error(
-            "Pi SDK غير صالح."
-          );
-        }
-
-
-        /*
-          Pi Network SDK version 2.0
-        */
-
-        const initResult =
-          PiSDK.init({
-            version:
-              PINOVA_CONFIG.sdkVersion,
-
-            sandbox:
-              PINOVA_CONFIG.sandbox
-          });
-
-
-        /*
-          يدعم الحالتين:
-          - init يرجع Promise
-          - init يرجع قيمة مباشرة
-        */
-
-        if (
-          initResult &&
-          typeof initResult.then ===
-          "function"
-        ) {
-          await initResult;
-        }
-
-
-        piReady = true;
-
-
-        setPiStatus(
-          PINOVA_CONFIG.sandbox
-            ? "Pi Sandbox"
-            : "Pi جاهز",
-          PINOVA_CONFIG.sandbox
-            ? "#2563eb"
-            : "#16a34a"
-        );
-
-
-        console.log(
-          "PiNova: Pi SDK initialized",
-          {
-            version:
-              PINOVA_CONFIG.sdkVersion,
-
-            sandbox:
-              PINOVA_CONFIG.sandbox
-          }
-        );
-
-
-        return true;
-
-      } catch (error) {
-
-        piReady = false;
-
-
-        console.warn(
-          "PiNova: Pi SDK initialization failed.",
-          error
-        );
-
-
-        /*
-          مهم:
-          فشل SDK لا يخفي التطبيق.
-        */
-
-        setPiStatus(
-          "Pi غير متصل",
-          "#64748b"
-        );
-
-
-        return false;
-      }
-    }
-
-
-    /*
-      ------------------------------------------------------------
-      تسجيل الدخول عبر Pi
-      ------------------------------------------------------------
-    */
-
-    async function authenticatePi() {
-
-      try {
-
-        if (!piReady) {
-
-          const ready =
-            await initPi();
-
-          if (!ready) {
-
-            alert(
-              "لم يتم تحميل Pi SDK.\n\n" +
-              "تأكد من فتح PiNova داخل Pi Browser."
-            );
-
-            return null;
-          }
-        }
-
-
-        if (
-          !window.Pi ||
-          typeof window.Pi.authenticate !==
-          "function"
-        ) {
-
-          alert(
-            "تسجيل الدخول عبر Pi غير متاح حالياً."
-          );
-
-          return null;
-        }
-
-
-        piAuth =
-          await window.Pi.authenticate(
-            [
-              "username",
-              "payments"
-            ],
-
-            onIncompletePaymentFound
-          );
-
-
-        if (
-          piAuth &&
-          piAuth.user
-        ) {
-
-          console.log(
-            "Pi authentication successful:",
-            piAuth.user
-          );
-
-
-          setPiStatus(
-            "متصل بـ Pi",
-            "#16a34a"
-          );
-
-
-          const username =
-            piAuth.user.username
-              ? piAuth.user.username
-              : "";
-
-
-          if (username) {
-
-            showSystemMessage(
-              "مرحباً " +
-              username +
-              " 👋",
-              3000
-            );
-          }
-        }
-
-
-        return piAuth;
-
-      } catch (error) {
-
-        console.error(
-          "Pi authentication error:",
-          error
-        );
-
-
-        setPiStatus(
-          "Pi غير متصل",
-          "#64748b"
-        );
-
-
-        alert(
-          "تعذر تسجيل الدخول عبر Pi.\n\n" +
-          "حاول مرة أخرى من داخل Pi Browser."
-        );
-
-
-        return null;
-      }
-    }
-
-
-    /*
-      ------------------------------------------------------------
-      المعاملات غير المكتملة
-      ------------------------------------------------------------
-    */
-
-    async function onIncompletePaymentFound(
-      payment
-    ) {
-
-      console.log(
-        "Incomplete Pi payment found:",
-        payment
-      );
-
-
-      /*
-        إذا لم يتم ربط Backend بعد،
-        لا نحاول إرسال طلب إلى /api.
-      */
-
-      if (
-        !PINOVA_CONFIG.backendBase
-      ) {
-
-        console.warn(
-          "PiNova: Backend غير مربوط بعد."
-        );
-
-        return;
-      }
-
-
-      try {
-
-        const response =
-          await fetch(
-            backendUrl(
-              "/api/pi/incomplete"
-            ),
-            {
-              method: "POST",
-
-              headers: {
-                "Content-Type":
-                  "application/json"
-              },
-
-              body:
-                JSON.stringify({
-                  payment: payment
-                })
-            }
-          );
-
-
-        if (!response.ok) {
-
-          console.warn(
-            "Backend did not accept incomplete payment:",
-            response.status
-          );
-        }
-
-      } catch (error) {
-
-        console.warn(
-          "Incomplete payment backend unavailable:",
-          error
-        );
-      }
-    }
-
-
-    /*
-      ------------------------------------------------------------
-      الدفع التجريبي
-      ------------------------------------------------------------
-    */
-
-    async function makeTestPayment() {
-
-      try {
-
-        const auth =
-          await authenticatePi();
-
-
-        if (!auth) {
-          return;
-        }
-
-
-        /*
-          لا يمكن تنفيذ دفع حقيقي
-          بدون Backend آمن.
-        */
-
-        if (
-          !PINOVA_CONFIG.backendBase
-        ) {
-
-          alert(
-            "تم الاتصال بحساب Pi بنجاح ✅\n\n" +
-
-            "لكن الدفع الحقيقي يحتاج Backend آمن " +
-            "للموافقة والإكمال.\n\n" +
-
-            "لا تضع Pi API Key داخل index.html.\n\n" +
-
-            "الخطوة التالية هي ربط Backend " +
-            "من Pi App Studio أو من خادم خاص."
-          );
-
-
-          return;
-        }
-
-
-        if (
-          typeof window.Pi.createPayment !==
-          "function"
-        ) {
-
-          alert(
-            "Pi Payment API غير متاحة حالياً."
-          );
-
-          return;
-        }
-
-
-        await window.Pi.createPayment(
-
-          {
-            amount:
-              PINOVA_CONFIG.paymentAmount,
-
-            memo:
-              PINOVA_CONFIG.paymentMemo,
-
-            metadata: {
-              type: "test",
-              step: "10",
-              timestamp:
-                Date.now()
-            }
-          },
-
-
-          {
-
-            /*
-              موافقة الخادم
-            */
-
-            onReadyForServerApproval:
-              async (paymentId) => {
-
-                try {
-
-                  const response =
-                    await fetch(
-                      backendUrl(
-                        "/api/pi/payments/approve"
-                      ),
-                      {
-                        method:
-                          "POST",
-
-                        headers: {
-                          "Content-Type":
-                            "application/json"
-                        },
-
-                        body:
-                          JSON.stringify({
-                            paymentId:
-                              paymentId
-                          })
-                      }
-                    );
-
-
-                  if (
-                    !response.ok
-                  ) {
-
-                    throw new Error(
-                      "Approval failed: HTTP " +
-                      response.status
-                    );
-                  }
-
-
-                  console.log(
-                    "Payment approved:",
-                    paymentId
-                  );
-
-                } catch (error) {
-
-                  console.error(
-                    "Server approval error:",
-                    error
-                  );
-
-
-                  alert(
-                    "تعذر اعتماد المعاملة من الخادم."
-                  );
-                }
-              },
-
-
-            /*
-              إكمال المعاملة
-            */
-
-            onReadyForServerCompletion:
-              async (
-                paymentId,
-                txid
-              ) => {
-
-                try {
-
-                  const response =
-                    await fetch(
-                      backendUrl(
-                        "/api/pi/payments/complete"
-                      ),
-                      {
-                        method:
-                          "POST",
-
-                        headers: {
-                          "Content-Type":
-                            "application/json"
-                        },
-
-                        body:
-                          JSON.stringify({
-                            paymentId:
-                              paymentId,
-
-                            txid:
-                              txid
-                          })
-                      }
-                    );
-
-
-                  if (
-                    !response.ok
-                  ) {
-
-                    throw new Error(
-                      "Completion failed: HTTP " +
-                      response.status
-                    );
-                  }
-
-
-                  alert(
-                    "🎉 تمت المعاملة بنجاح!\n\n" +
-                    "Payment ID: " +
-                    paymentId
-                  );
-
-                } catch (error) {
-
-                  console.error(
-                    "Server completion error:",
-                    error
-                  );
-
-
-                  alert(
-                    "تم إرسال المعاملة، " +
-                    "لكن تعذر تأكيد الإكمال من الخادم."
-                  );
-                }
-              },
-
-
-            /*
-              إلغاء الدفع
-            */
-
-            onCancel:
-              (paymentId) => {
-
-                console.log(
-                  "Payment cancelled:",
-                  paymentId
-                );
-
-                showSystemMessage(
-                  "تم إلغاء المعاملة.",
-                  3000
-                );
-              },
-
-
-            /*
-              خطأ في الدفع
-            */
-
-            onError:
-              (
-                error,
-                payment
-              ) => {
-
-                console.error(
-                  "Pi payment error:",
-                  error,
-                  payment
-                );
-
-
-                alert(
-                  "حدث خطأ أثناء المعاملة.\n\n" +
-                  "تحقق من Pi Browser والخادم."
-                );
-              }
-          }
-        );
-
-      } catch (error) {
-
-        console.error(
-          "Pi payment flow error:",
-          error
-        );
-
-
-        alert(
-          "تعذر بدء المعاملة:\n" +
-          (
-            error &&
-            error.message
-              ? error.message
-              : error
-          )
-        );
-      }
-    }
-
-
-    /*
-      ------------------------------------------------------------
-      وظائف واجهة PiNova
-      ------------------------------------------------------------
-    */
-
-    function openSection(
-      section
-    ) {
-
-      const names = {
-        content:
-          "صناعة المحتوى",
-
-        cyber:
-          "الأمن السيبراني",
-
-        academy:
-          "الأكاديمية"
-      };
-
-
-      alert(
-        "جاري فتح قسم: " +
-        (
-          names[section] ||
-          section
-        )
-      );
-    }
-
-
-    function openModal(
-      title
-    ) {
-
-      alert(
-        "جاري فتح: " +
-        title
-      );
-    }
-
-
-    function setActiveNav(
-      element
-    ) {
-
-      const items =
-        document.querySelectorAll(
-          ".nav-item"
-        );
-
-
-      items.forEach(
-        item => {
-          item.classList.remove(
-            "active"
-          );
-        }
-      );
-
-
-      element.classList.add(
-        "active"
-      );
-    }
-
-
-    /*
-      ------------------------------------------------------------
-      منع أي خطأ JavaScript من تحويل التطبيق إلى شاشة بيضاء
-      ------------------------------------------------------------
-    */
-
-    window.addEventListener(
-      "error",
-      function(event) {
-
-        console.error(
-          "PiNova JavaScript error:",
-          event.error ||
-          event.message
-        );
-      }
-    );
-
-
-    window.addEventListener(
-      "unhandledrejection",
-      function(event) {
-
-        console.error(
-          "PiNova Promise error:",
-          event.reason
-        );
-      }
-    );
-
-
-    /*
-      ------------------------------------------------------------
-      تشغيل التطبيق
-      ------------------------------------------------------------
-    */
-
-    document.addEventListener(
-      "DOMContentLoaded",
-      function() {
-
-        /*
-          الواجهة أصبحت جاهزة.
-          نغير الحالة مباشرة حتى نعرف أن HTML اشتغل.
-        */
-
-        setPiStatus(
-          "واجهة PiNova جاهزة",
-          "#16a34a"
-        );
-
-
-        const buttons =
-          document.querySelectorAll(
-            ".header-actions .icon-btn"
-          );
-
-
-        /*
-          زر الإشعارات
-        */
-
-        if (buttons[0]) {
-
-          buttons[0].addEventListener(
-            "click",
-            function() {
-
-              alert(
-                "لا توجد إشعارات جديدة حالياً."
-              );
-            }
-          );
-        }
-
-
-        /*
-          زر الحساب / Pi
-        */
-
-        if (buttons[1]) {
-
-          buttons[1].addEventListener(
-            "click",
-            function() {
-
-              authenticatePi();
-            }
-          );
-        }
-
-
-        /*
-          مهم جداً:
-          Pi SDK يبدأ في الخلفية
-          ولا يمنع ظهور الواجهة.
-        */
-
-        setTimeout(
-          function() {
-            initPi();
-          },
-          100
-        );
-      }
-    );
   </script>
 
 </body>
-</html>
+</html>     
