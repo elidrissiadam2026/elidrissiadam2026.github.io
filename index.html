@@ -1565,36 +1565,371 @@
     <div id="transactions-list"></div>
   </div>
 
-  <!-- AI Chatbot -->
-  <div class="ai-floating-btn" onclick="toggleAIChat()">
-    🤖
-  </div>
+  <!<!-- AI Chatbot -->
+    <div class="ai-floating-btn" onclick="toggleAIChat()">
+      🤖
+    </div>
 
-  <div class="ai-chatbot" id="ai-chatbot">
-    <div class="chatbot-header">
-      <div class="chatbot-avatar">🤖</div>
-      <div class="chatbot-title">
-        <h3>مساعد PiNova الذكي</h3>
-        <div class="chatbot-status">متصل الآن • جاهز للمساعدة</div>
+    <div class="ai-chatbot" id="ai-chatbot">
+      <div class="chatbot-header">
+        <div class="chatbot-avatar">🤖</div>
+        <div class="chatbot-title">
+          <h3>مساعد PiNova الذكي</h3>
+          <div class="chatbot-status">متصل الآن • جاهز للمساعدة</div>
+        </div>
+      </div>
+      <div class="chatbot-messages" id="chatbot-messages">
+        <div class="message ai">
+          <div class="message-avatar">🤖</div>
+          <div class="message-content">
+            مرحباً! أنا مساعد PiNova الذكي <br>
+            كيف يمكنني مساعدتك اليوم؟
+          </div>
+        </div>
+      </div>
+      <div class="chatbot-input">
+        <input type="text" id="chatbot-input-field" placeholder="اكتب رسالتك هنا..." onkeypress="handleChatKeypress(event)">
+        <button class="chatbot-send" onclick="sendMessage()">➤</button>
       </div>
     </div>
-    <div class="chatbot-messages" id="chatbot-messages">
-      <div class="message ai">
-        <div class="message-avatar">🤖</div>
-        <div class="message-content">
-          مرحباً! أنا مساعد PiNova الذكي <br>
-          كيف يمكنني مساعدتك اليوم؟
+
+    <button class="card-payment-btn" type="button" onclick="processCardPayment()">
+      💳 إجراء معاملة بالبطاقة
+    </button>
+
+    <nav class="bottom-nav">
+      <div class="nav-item active" onclick="showMain()">
+        <span class="nav-icon">🏠</span>
+        <span>الرئيسية</span>
+      </div>
+      <div class="nav-item" onclick="showDashboard()">
+        <span class="nav-icon">📊</span>
+        <span>الإحصائيات</span>
+      </div>
+      <div class="nav-item">
+        <span class="nav-icon">📢</span>
+        <span>الإشهارات</span>
+      </div>
+      <div class="nav-item" onclick="showProfile()">
+        <span class="nav-icon">👤</span>
+        <span>حسابي</span>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay" onclick="closeAllPanels()"></div>
+
+  <!-- Notifications Panel -->
+  <div class="notifications-panel" id="notifications-panel">
+    <div class="notifications-header">
+      <h3>🔔 الإشعارات</h3>
+      <button class="notifications-close" onclick="toggleNotifications()">✕</button>
+    </div>
+    <div id="notifications-list">
+      <div class="notification-item unread">
+        <div class="notification-icon" style="background: linear-gradient(135deg, #fbbf24, #f59e0b); color: white;">🎉</div>
+        <div class="notification-content">
+          <div class="notification-title">تحديث جديد!</div>
+          <div class="notification-text">تم إضافة ميزات جديدة للمنصة</div>
+          <div class="notification-time">منذ ساعة</div>
+        </div>
+      </div>
+      <div class="notification-item">
+        <div class="notification-icon" style="background: linear-gradient(135deg, #22c55e, #16a34a); color: white;">✅</div>
+        <div class="notification-content">
+          <div class="notification-title">تمت العملية بنجاح</div>
+          <div class="notification-text">تم إتمام معاملتك بنجاح</div>
+          <div class="notification-time">منذ 3 ساعات</div>
+        </div>
+      </div>
+      <div class="notification-item">
+        <div class="notification-icon" style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white;">💡</div>
+        <div class="notification-content">
+          <div class="notification-title">نصيحة</div>
+          <div class="notification-text">جرب استخدام المساعد الذكي للحصول على مساعدة فورية</div>
+          <div class="notification-time">منذ يوم</div>
         </div>
       </div>
     </div>
-    <div class="chatbot-input">
-      <input type="text" id="chatbot-input-field" placeholder="اكتب رسالتك هنا..." onkeypress="handleChatKeypress(event)">
-      <button class="chatbot-send" onclick="sendMessage()">➤</button>
-    </div>
   </div>
 
-  <button class="card-payment-btn" type="button" onclick="processCardPayment()">
-    💳 إجراء معاملة بالبطاقة
-  </button>
+  <script>
+    // إخفاء شاشة التحميل
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        document.getElementById('loading-screen').classList.add('hidden');
+      }, 2000);
+    });
 
-  <nav class="bottom
+    // تبديل الثيم
+    function toggleTheme() {
+      const html = document.documentElement;
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      
+      const themeBtn = document.getElementById('theme-btn');
+      themeBtn.textContent = newTheme === 'dark' ? '️' : '🌙';
+    }
+
+    // البحث
+    function toggleSearch() {
+      document.getElementById('search-container').classList.toggle('active');
+    }
+
+    // الإشعارات
+    function toggleNotifications() {
+      document.getElementById('notifications-panel').classList.toggle('active');
+      document.getElementById('overlay').classList.toggle('active');
+    }
+
+    // المساعد الذكي
+    function toggleAIChat() {
+      document.getElementById('ai-chatbot').classList.toggle('active');
+    }
+
+    // لوحة التحكم
+    function toggleDashboard() {
+      showDashboard();
+    }
+
+    function showDashboard() {
+      document.getElementById('main-content').classList.add('hidden');
+      document.getElementById('profile').classList.remove('active');
+      document.getElementById('transactions').classList.remove('active');
+      document.getElementById('dashboard').classList.add('active');
+      document.getElementById('dashboard-btn').classList.add('active');
+      initCharts();
+    }
+
+    function showMain() {
+      document.getElementById('main-content').classList.remove('hidden');
+      document.getElementById('dashboard').classList.remove('active');
+      document.getElementById('profile').classList.remove('active');
+      document.getElementById('transactions').classList.remove('active');
+      document.getElementById('dashboard-btn').classList.remove('active');
+    }
+
+    function showProfile() {
+      document.getElementById('main-content').classList.add('hidden');
+      document.getElementById('dashboard').classList.remove('active');
+      document.getElementById('profile').classList.add('active');
+      document.getElementById('transactions').classList.remove('active');
+    }
+
+    function showTransactions() {
+      document.getElementById('main-content').classList.add('hidden');
+      document.getElementById('dashboard').classList.remove('active');
+      document.getElementById('profile').classList.remove('active');
+      document.getElementById('transactions').classList.add('active');
+      loadTransactions();
+    }
+
+    function closeAllPanels() {
+      document.getElementById('notifications-panel').classList.remove('active');
+      document.getElementById('overlay').classList.remove('active');
+    }
+
+    // Toast Notifications
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      
+      const icons = {
+        success: '✅',
+        error: '❌',
+        info: 'ℹ️'
+      };
+      
+      toast.innerHTML = `
+        <span class="toast-icon">${icons[type]}</span>
+        <span class="toast-message">${message}</span>
+        <button class="toast-close" onclick="this.parentElement.remove()">×</button>
+      `;
+      
+      container.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.remove();
+      }, 3000);
+    }
+
+    // تحميل المعاملات
+    function loadTransactions() {
+      const transactions = [
+        { icon: '🛒', title: 'شراء من المتجر', date: '2026-01-15', amount: '-150 DH', type: 'negative' },
+        { icon: '💰', title: 'إيداع رصيد', date: '2026-01-14', amount: '+500 DH', type: 'positive' },
+        { icon: '📱', title: 'شحن الرصيد', date: '2026-01-13', amount: '-100 DH', type: 'negative' },
+        { icon: '🎁', title: 'مكافأة', date: '2026-01-12', amount: '+50 DH', type: 'positive' }
+      ];
+      
+      const container = document.getElementById('transactions-list');
+      container.innerHTML = transactions.map(t => `
+        <div class="transaction-item">
+          <div class="transaction-icon">${t.icon}</div>
+          <div class="transaction-info">
+            <div class="transaction-title">${t.title}</div>
+            <div class="transaction-date">${t.date}</div>
+          </div>
+          <div class="transaction-amount ${t.type}">${t.amount}</div>
+        </div>
+      `).join('');
+    }
+
+    // الرسوم البيانية
+    let chartsInitialized = false;
+    function initCharts() {
+      if (chartsInitialized) return;
+      
+      const growthCtx = document.getElementById('growthChart').getContext('2d');
+      new Chart(growthCtx, {
+        type: 'line',
+        data: {
+          labels: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو'],
+          datasets: [{
+            label: 'المستخدمين',
+            data: [65, 78, 90, 110, 135, 156],
+            borderColor: '#fbbf24',
+            backgroundColor: 'rgba(251, 191, 36, 0.1)',
+            tension: 0.4,
+            fill: true
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: true, position: 'top' }
+          }
+        }
+      });
+
+      const servicesCtx = document.getElementById('servicesChart').getContext('2d');
+      new Chart(servicesCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['صناعة المحتوى', 'الأمن السيبراني', 'التجارة الإلكترونية', 'التعليم'],
+          datasets: [{
+            data: [35, 25, 25, 15],
+            backgroundColor: ['#22c55e', '#dc2626', '#ec4899', '#fbbf24']
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { position: 'bottom' }
+          }
+        }
+      });
+      
+      chartsInitialized = true;
+    }
+
+    // البحث
+    function handleSearch(query) {
+      if (query.length > 2) {
+        console.log('Searching for:', query);
+      }
+    }
+
+    // Chatbot
+    function handleChatKeypress(event) {
+      if (event.key === 'Enter') sendMessage();
+    }
+
+    function sendMessage() {
+      const input = document.getElementById('chatbot-input-field');
+      const message = input.value.trim();
+      
+      if (message) {
+        addMessage(message, 'user');
+        input.value = '';
+        
+        setTimeout(() => {
+          const response = getAIResponse(message);
+          addMessage(response, 'ai');
+        }, 1000);
+      }
+    }
+
+    function addMessage(text, sender) {
+      const container = document.getElementById('chatbot-messages');
+      const div = document.createElement('div');
+      div.className = `message ${sender}`;
+      div.innerHTML = `
+        <div class="message-avatar">${sender === 'ai' ? '🤖' : ''}</div>
+        <div class="message-content">${text}</div>
+      `;
+      container.appendChild(div);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function getAIResponse(message) {
+      const responses = {
+        'مرحبا': 'أهلاً وسهلاً! كيف يمكنني مساعدتك في PiNova؟',
+        'دعم': 'نحن هنا لمساعدتك 24/7. تفضل بطرح سؤالك!',
+        'معاملة': 'يمكنك إجراء المعاملات عبر زر "إجراء معاملة بالبطاقة"',
+        'default': 'شكراً لتواصلك! سأقوم بالرد عليك قريباً. هل لديك أي سؤال آخر؟'
+      };
+      
+      for (let key in responses) {
+        if (message.includes(key)) return responses[key];
+      }
+      return responses['default'];
+    }
+
+    // وظائف عامة
+    function openSection(section) {
+      showToast('جاري فتح: ' + section, 'info');
+    }
+
+    function openModal(title) {
+      showToast('جاري فتح: ' + title, 'info');
+    }
+
+    function processCardPayment() {
+      showToast('جاري معالجة الدفع...', 'info');
+      setTimeout(() => {
+        showToast('تمت العملية بنجاح!', 'success');
+      }, 2000);
+    }
+
+    // التنقل النشط
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.addEventListener('click', function() {
+        document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    // تحميل الثيم المحفوظ
+    window.addEventListener('DOMContentLoaded', function() {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      const themeBtn = document.getElementById('theme-btn');
+      if (themeBtn) {
+        themeBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+      }
+    });
+
+    // Pi SDK
+    if (window.PiNetwork) {
+      PiNetwork.init({
+        onReady: function() {
+          document.getElementById('pi-status').textContent = 'متصل';
+          document.getElementById('pi-status').style.color = '#22c55e';
+        },
+        onError: function(error) {
+          document.getElementById('pi-status').textContent = 'خطأ';
+          document.getElementById('pi-status').style.color = '#dc2626';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
