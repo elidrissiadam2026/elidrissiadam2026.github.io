@@ -5,41 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="theme-color" content="#fbbf24" />
   <title>PiNova - منصة ذكية متكاملة</title>
-
-  <!-- Pi Network SDK (رسمي) -->
   <script src="https://sdk.minepi.com/pi-sdk.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
   <style>
-    /* --- نفس التصميم الأصلي تماماً كما طلبت --- */
+    /* --- نفس التصميم الأصلي الرائع --- */
     :root {
-      --primary: #fbbf24;
-      --primary-dark: #f59e0b;
-      --primary-darker: #d97706;
-      --bg: #EBF5FB;
-      --card-bg: rgba(255,255,255,0.95);
-      --text: #1e293b;
-      --text-light: #64748b;
-      --border: rgba(251,191,36,0.3);
-      --shadow: rgba(0,0,0,0.08);
-      --success: #22c55e;
-      --danger: #dc2626;
-      --info: #3b82f6;
+      --primary: #fbbf24; --primary-dark: #f59e0b; --primary-darker: #d97706;
+      --bg: #EBF5FB; --card-bg: rgba(255,255,255,0.95); --text: #1e293b;
+      --text-light: #64748b; --border: rgba(251,191,36,0.3); --shadow: rgba(0,0,0,0.08);
+      --success: #22c55e; --danger: #dc2626; --info: #3b82f6;
     }
-
     [data-theme="dark"] {
-      --bg: #0f172a;
-      --card-bg: rgba(30,41,59,0.95);
-      --text: #f1f5f9;
-      --text-light: #94a3b8;
-      --border: rgba(251,191,36,0.4);
-      --shadow: rgba(0,0,0,0.3);
+      --bg: #0f172a; --card-bg: rgba(30,41,59,0.95); --text: #f1f5f9;
+      --text-light: #94a3b8; --border: rgba(251,191,36,0.4); --shadow: rgba(0,0,0,0.3);
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; -webkit-tap-highlight-color: transparent; }
     html { min-height: 100%; background: var(--bg); scroll-behavior: smooth; }
     body { background: var(--bg); color: var(--text); min-height: 100vh; padding-bottom: 90px; overflow-x: hidden; transition: background 0.3s, color 0.3s; }
-    
     body::before {
       content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
       background: radial-gradient(circle at 20% 30%, rgba(34, 197, 94, 0.08) 0%, transparent 50%),
@@ -48,7 +30,7 @@
       z-index: -1; animation: pulse 8s ease-in-out infinite; pointer-events: none;
     }
     @keyframes pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
-
+    
     .loading-screen { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, #fbbf24, #f59e0b); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; transition: opacity 0.5s, visibility 0.5s; }
     .loading-screen.hidden { opacity: 0; visibility: hidden; }
     .loading-logo { width: 80px; height: 80px; background: white; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 40px; margin-bottom: 20px; animation: bounce 1s infinite; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
@@ -60,35 +42,29 @@
     .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
     @keyframes dotPulse { 0%, 80%, 100% { transform: scale(0.6); opacity: 0.5; } 40% { transform: scale(1); opacity: 1; } }
 
-    header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: var(--card-bg); backdrop-filter: blur(20px); position: sticky; top: 0; z-index: 100; border-bottom: 3px solid var(--primary); box-shadow: 0 4px 20px var(--shadow); transition: all 0.3s; }
+    header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: var(--card-bg); backdrop-filter: blur(20px); position: sticky; top: 0; z-index: 100; border-bottom: 3px solid var(--primary); box-shadow: 0 4px 20px var(--shadow); }
     .logo { display: flex; align-items: center; gap: 10px; font-size: 22px; font-weight: bold; color: var(--text); }
     .logo-icon { width: 42px; height: 42px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; box-shadow: 0 0 20px rgba(251,191,36,0.6); }
     .header-actions { display: flex; gap: 10px; align-items: center; }
     .icon-btn { width: 40px; height: 40px; background: rgba(251,191,36,0.15); border-radius: 50%; border: 2px solid var(--primary); color: var(--primary-dark); cursor: pointer; font-size: 18px; transition: all 0.3s; display: flex; align-items: center; justify-content: center; position: relative; }
-    .icon-btn:hover { background: rgba(251,191,36,0.3); transform: scale(1.1); box-shadow: 0 0 15px rgba(251,191,36,0.4); }
+    .icon-btn:hover { background: rgba(251,191,36,0.3); transform: scale(1.1); }
     .badge { position: absolute; top: -5px; right: -5px; background: var(--danger); color: white; font-size: 10px; font-weight: bold; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid var(--bg); }
-
-    .search-container { padding: 15px 20px; display: none; animation: slideDown 0.3s; }
-    .search-container.active { display: block; }
-    @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-    .search-box { display: flex; align-items: center; background: var(--card-bg); border: 2px solid var(--border); border-radius: 15px; padding: 12px 16px; gap: 10px; box-shadow: 0 4px 15px var(--shadow); }
-    .search-box input { flex: 1; border: none; background: transparent; font-size: 15px; color: var(--text); outline: none; }
 
     .hero { padding: 30px 20px 20px; text-align: center; animation: fadeInUp 0.6s; }
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
     .hero-badge { display: inline-block; padding: 8px 20px; background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(234,179,8,0.15)); border: 2px solid var(--primary); border-radius: 25px; font-size: 13px; margin-bottom: 15px; color: var(--primary-darker); font-weight: bold; }
-    .hero h1 { font-size: 32px; margin-bottom: 10px; background: linear-gradient(90deg, var(--primary-dark), var(--primary-darker), var(--success)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero h1 { font-size: 32px; margin-bottom: 10px; background: linear-gradient(90deg, var(--primary-dark), var(--primary-darker), var(--success)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .hero p { color: var(--text-light); font-size: 15px; line-height: 1.6; }
 
     .quick-actions { display: flex; gap: 12px; padding: 0 20px; margin: 20px 0; overflow-x: auto; scrollbar-width: none; }
     .quick-actions::-webkit-scrollbar { display: none; }
     .quick-action { flex-shrink: 0; width: 80px; height: 80px; background: var(--card-bg); border: 2px solid var(--border); border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px var(--shadow); }
-    .quick-action:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 8px 25px rgba(251,191,36,0.3); }
+    .quick-action:hover { transform: translateY(-5px); border-color: var(--primary); }
     .quick-action-icon { font-size: 28px; }
     .quick-action-text { font-size: 10px; color: var(--text-light); font-weight: bold; }
 
     .section-title { padding: 0 20px; margin: 30px 0 18px; font-size: 20px; font-weight: bold; display: flex; align-items: center; gap: 10px; color: var(--text); }
-    .section-title::before { content: ''; width: 5px; height: 28px; background: linear-gradient(180deg, var(--primary), var(--success)); border-radius: 3px; box-shadow: 0 0 10px rgba(251,191,36,0.5); }
+    .section-title::before { content: ''; width: 5px; height: 28px; background: linear-gradient(180deg, var(--primary), var(--success)); border-radius: 3px; }
 
     .cards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 0 20px; }
     @media (max-width: 480px) { .cards-grid { grid-template-columns: 1fr; } }
@@ -99,124 +75,73 @@
     .card-icon-main { font-size: 48px; margin-bottom: 12px; filter: drop-shadow(0 0 15px currentColor); }
     .card h3 { font-size: 18px; margin-bottom: 8px; font-weight: bold; color: var(--text); }
     .card p { font-size: 12px; opacity: 0.95; margin-bottom: 15px; line-height: 1.5; color: var(--text-light); }
-    .card-btn { padding: 10px 18px; background: rgba(251,191,36,0.25); border: 2px solid var(--primary); border-radius: 12px; color: var(--primary-darker); font-weight: bold; cursor: pointer; font-size: 13px; width: fit-content; backdrop-filter: blur(10px); transition: all 0.3s; }
-    .card-btn:hover { background: rgba(251,191,36,0.4); box-shadow: 0 0 20px rgba(251,191,36,0.3); }
+    .card-btn { padding: 10px 18px; background: rgba(251,191,36,0.25); border: 2px solid var(--primary); border-radius: 12px; color: var(--primary-darker); font-weight: bold; cursor: pointer; font-size: 13px; width: fit-content; transition: all 0.3s; }
+    .card-btn:hover { background: rgba(251,191,36,0.4); }
 
-    .card-content { background: linear-gradient(135deg, rgba(34,197,94,0.15), rgba(22,163,74,0.1)); box-shadow: 0 0 30px rgba(34,197,94,0.2), inset 0 0 30px rgba(34,197,94,0.05); }
+    .card-content { background: linear-gradient(135deg, rgba(34,197,94,0.15), rgba(22,163,74,0.1)); }
     .card-content .card-icon-main { color: #16a34a; }
-    .card-cyber { background: linear-gradient(135deg, rgba(220,38,38,0.15), rgba(185,28,28,0.1)); box-shadow: 0 0 30px rgba(220,38,38,0.2), inset 0 0 30px rgba(220,38,38,0.05); }
+    .card-cyber { background: linear-gradient(135deg, rgba(220,38,38,0.15), rgba(185,28,28,0.1)); }
     .card-cyber .card-icon-main { color: #dc2626; }
-    .card-academy { background: linear-gradient(135deg, rgba(234,179,8,0.2), rgba(217,119,6,0.15)); box-shadow: 0 0 30px rgba(234,179,8,0.25), inset 0 0 30px rgba(234,179,8,0.08); }
+    .card-academy { background: linear-gradient(135deg, rgba(234,179,8,0.2), rgba(217,119,6,0.15)); }
     .card-academy .card-icon-main { color: #ca8a04; }
-    .card-landing { background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(37,99,235,0.1)); box-shadow: 0 0 30px rgba(59,130,246,0.2), inset 0 0 30px rgba(59,130,246,0.05); }
+    .card-landing { background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(37,99,235,0.1)); }
     .card-landing .card-icon-main { color: #2563eb; }
-    .card-ecommerce { background: linear-gradient(135deg, rgba(236,72,153,0.15), rgba(219,39,119,0.1)); box-shadow: 0 0 30px rgba(236,72,153,0.2), inset 0 0 30px rgba(236,72,153,0.05); }
+    .card-ecommerce { background: linear-gradient(135deg, rgba(236,72,153,0.15), rgba(219,39,119,0.1)); }
     .card-ecommerce .card-icon-main { color: #db2777; }
-    .card-ads { background: linear-gradient(135deg, rgba(251,191,36,0.25), rgba(234,179,8,0.2)); box-shadow: 0 0 40px rgba(251,191,36,0.3), inset 0 0 40px rgba(251,191,36,0.1); border: 3px solid var(--primary); animation: glow 2s ease-in-out infinite; }
+    .card-ads { background: linear-gradient(135deg, rgba(251,191,36,0.25), rgba(234,179,8,0.2)); border: 3px solid var(--primary); animation: glow 2s ease-in-out infinite; }
     @keyframes glow { 0%, 100% { box-shadow: 0 0 30px rgba(251,191,36,0.3); } 50% { box-shadow: 0 0 50px rgba(251,191,36,0.5); } }
     .card-ads .card-icon-main { color: #d97706; }
 
-    .dashboard-container, .profile-container, .transactions-container { display: none; padding: 20px; animation: fadeIn 0.5s; }
-    .dashboard-container.active, .profile-container.active, .transactions-container.active { display: block; }
+    /* --- Views & Containers --- */
+    .view-container { display: none; padding: 20px; animation: fadeIn 0.5s; }
+    .view-container.active { display: block; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-    .dashboard-header, .profile-header { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); padding: 30px; border-radius: 24px; margin-bottom: 25px; color: white; box-shadow: 0 10px 30px rgba(251,191,36,0.3); }
-    .profile-header { text-align: center; position: relative; overflow: hidden; padding: 40px 30px; }
-    .profile-avatar { width: 100px; height: 100px; background: white; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 50px; box-shadow: 0 5px 20px rgba(0,0,0,0.2); border: 4px solid white; }
+    .demo-notice { background: rgba(59, 130, 246, 0.1); border: 1px solid var(--info); color: var(--info); padding: 10px; border-radius: 8px; font-size: 12px; margin-bottom: 15px; text-align: center; }
     
-    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 25px; }
-    .stat-card { background: var(--card-bg); padding: 20px; border-radius: 20px; box-shadow: 0 4px 15px var(--shadow); border: 2px solid var(--border); transition: all 0.3s; }
-    .stat-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-    .stat-card-value { font-size: 24px; font-weight: bold; color: var(--text); margin-bottom: 5px; }
-    .stat-card-label { color: var(--text-light); font-size: 12px; }
-    .stat-card-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+    .form-group { margin-bottom: 15px; }
+    .form-group label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 14px; }
+    .form-input { width: 100%; padding: 12px; border: 2px solid var(--border); border-radius: 12px; background: var(--bg); color: var(--text); font-size: 14px; outline: none; }
+    .form-input:focus { border-color: var(--primary); }
+    
+    .btn-primary { width: 100%; padding: 14px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; border: none; border-radius: 12px; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(251,191,36,0.4); }
+    .btn-secondary { width: 100%; padding: 12px; background: transparent; border: 2px solid var(--border); color: var(--text); border-radius: 12px; font-weight: bold; margin-top: 10px; cursor: pointer; }
 
-    .chart-container { background: var(--card-bg); padding: 20px; border-radius: 20px; box-shadow: 0 4px 15px var(--shadow); margin-bottom: 25px; border: 2px solid var(--border); }
-    .chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-    .chart-title { font-size: 16px; font-weight: bold; color: var(--text); }
+    .result-box { background: var(--bg); padding: 15px; border-radius: 12px; margin-top: 15px; border: 1px dashed var(--primary); display: none; }
+    .result-box.show { display: block; animation: fadeIn 0.5s; }
 
-    .profile-menu { background: var(--card-bg); border-radius: 20px; overflow: hidden; box-shadow: 0 4px 15px var(--shadow); border: 2px solid var(--border); }
-    .profile-menu-item { display: flex; align-items: center; gap: 15px; padding: 18px 20px; border-bottom: 1px solid var(--border); cursor: pointer; transition: all 0.3s; }
+    .back-btn { display: inline-flex; align-items: center; gap: 5px; color: var(--text-light); cursor: pointer; margin-bottom: 15px; font-size: 14px; }
+    .back-btn:hover { color: var(--primary-dark); }
+
+    .list-item { background: var(--card-bg); padding: 15px; border-radius: 12px; margin-bottom: 10px; border: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+
+    /* Profile & Nav (مختصرة للحفاظ على الطول) */
+    .profile-header { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); padding: 30px; border-radius: 24px; margin-bottom: 25px; color: white; text-align: center; }
+    .profile-avatar { width: 80px; height: 80px; background: white; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 40px; }
+    .profile-menu { background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 2px solid var(--border); }
+    .profile-menu-item { display: flex; align-items: center; gap: 15px; padding: 18px 20px; border-bottom: 1px solid var(--border); cursor: pointer; }
     .profile-menu-item:last-child { border-bottom: none; }
     .profile-menu-item:hover { background: rgba(251,191,36,0.1); }
-    .profile-menu-icon { width: 40px; height: 40px; background: rgba(251,191,36,0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
-    .profile-menu-text { flex: 1; font-weight: bold; color: var(--text); font-size: 14px; }
-    .profile-menu-arrow { color: var(--text-light); font-size: 18px; }
-
-    .transaction-item { background: var(--card-bg); padding: 18px; border-radius: 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 15px; border: 2px solid var(--border); box-shadow: 0 2px 10px var(--shadow); transition: all 0.3s; }
-    .transaction-item:hover { transform: translateX(-5px); border-color: var(--primary); }
-    .transaction-icon { width: 45px; height: 45px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
-    .transaction-info { flex: 1; }
-    .transaction-title { font-weight: bold; color: var(--text); margin-bottom: 3px; font-size: 14px; }
-    .transaction-date { font-size: 12px; color: var(--text-light); }
-    .transaction-amount { font-weight: bold; font-size: 15px; }
-    .transaction-amount.positive { color: var(--success); }
-    .transaction-amount.negative { color: var(--danger); }
-
-    .ai-chatbot { position: fixed; bottom: 100px; left: 20px; width: 320px; max-height: 450px; background: var(--card-bg); border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); border: 3px solid var(--primary); display: none; flex-direction: column; z-index: 1000; animation: slideIn 0.3s; }
-    .ai-chatbot.active { display: flex; }
-    @keyframes slideIn { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
-    .chatbot-header { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); padding: 15px; border-radius: 21px 21px 0 0; display: flex; align-items: center; gap: 12px; color: white; }
-    .chatbot-avatar { width: 40px; height: 40px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; }
-    .chatbot-title h3 { font-size: 16px; margin-bottom: 2px; }
-    .chatbot-status { font-size: 11px; opacity: 0.9; }
-    .chatbot-messages { flex: 1; overflow-y: auto; padding: 15px; max-height: 250px; }
-    .message { margin-bottom: 12px; display: flex; gap: 10px; animation: messageSlide 0.3s; }
-    @keyframes messageSlide { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    .message.ai { flex-direction: row; }
-    .message.user { flex-direction: row-reverse; }
-    .message-avatar { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
-    .message.ai .message-avatar { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); }
-    .message.user .message-avatar { background: linear-gradient(135deg, var(--info), #2563eb); }
-    .message-content { background: rgba(241,245,249,0.5); padding: 10px 14px; border-radius: 16px; max-width: 80%; font-size: 13px; line-height: 1.4; color: var(--text); }
-    .message.user .message-content { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; }
-    .chatbot-input { padding: 12px; border-top: 2px solid var(--border); display: flex; gap: 8px; }
-    .chatbot-input input { flex: 1; padding: 10px 14px; border: 2px solid var(--border); border-radius: 12px; font-size: 13px; outline: none; background: var(--bg); color: var(--text); }
-    .chatbot-send { width: 40px; height: 40px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border: none; border-radius: 12px; color: white; font-size: 18px; cursor: pointer; }
-
-    .ai-floating-btn { position: fixed; bottom: 100px; left: 20px; width: 55px; height: 55px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; cursor: pointer; box-shadow: 0 5px 20px rgba(251,191,36,0.5); z-index: 999; transition: all 0.3s; border: 3px solid white; }
-    .ai-floating-btn:hover { transform: scale(1.1) rotate(10deg); }
-
-    .card-payment-btn { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 380px; padding: 14px; background: linear-gradient(135deg, var(--primary-dark), var(--primary-darker)); color: white; border: 2px solid var(--primary); border-radius: 15px; font-size: 15px; font-weight: bold; cursor: pointer; z-index: 1000; box-shadow: 0 10px 30px rgba(245,158,11,0.5); transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px; }
-    .card-payment-btn:hover { transform: translateX(-50%) translateY(-3px); }
-
-    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: var(--card-bg); backdrop-filter: blur(20px); display: flex; justify-content: space-around; padding: 10px 0; border-top: 3px solid var(--primary); z-index: 99; box-shadow: 0 -4px 20px var(--shadow); }
-    .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--text-light); font-size: 10px; cursor: pointer; transition: all 0.3s; padding: 5px 10px; }
+    
+    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: var(--card-bg); backdrop-filter: blur(20px); display: flex; justify-content: space-around; padding: 10px 0; border-top: 3px solid var(--primary); z-index: 99; }
+    .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--text-light); font-size: 10px; cursor: pointer; }
     .nav-item.active { color: var(--primary-dark); }
-    .nav-item.active .nav-icon { transform: scale(1.2); }
-    .nav-item .nav-icon { font-size: 20px; transition: transform 0.3s; }
+    .nav-item .nav-icon { font-size: 20px; }
 
     .toast-container { position: fixed; top: 80px; left: 50%; transform: translateX(-50%); z-index: 3000; display: flex; flex-direction: column; gap: 10px; width: 90%; max-width: 380px; pointer-events: none; }
-    .toast { background: var(--card-bg); padding: 12px 16px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.15); border-right: 4px solid var(--primary); display: flex; align-items: center; gap: 10px; animation: toastSlide 0.3s; backdrop-filter: blur(20px); pointer-events: auto; }
+    .toast { background: var(--card-bg); padding: 12px 16px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.15); border-right: 4px solid var(--primary); display: flex; align-items: center; gap: 10px; animation: toastSlide 0.3s; pointer-events: auto; }
     @keyframes toastSlide { from { opacity: 0; transform: translateX(100px); } to { opacity: 1; transform: translateX(0); } }
     .toast.success { border-right-color: var(--success); }
     .toast.error { border-right-color: var(--danger); }
     .toast.info { border-right-color: var(--info); }
-    .toast-icon { font-size: 20px; }
-    .toast-message { flex: 1; color: var(--text); font-size: 13px; }
-    .toast-close { background: none; border: none; color: var(--text-light); cursor: pointer; font-size: 16px; }
-
-    .notifications-panel { position: fixed; top: 0; right: -100%; width: 100%; max-width: 380px; height: 100vh; background: var(--card-bg); z-index: 2000; transition: right 0.3s; box-shadow: -5px 0 30px rgba(0,0,0,0.2); overflow-y: auto; }
-    .notifications-panel.active { right: 0; }
-    .notifications-header { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); padding: 20px; color: white; display: flex; justify-content: space-between; align-items: center; }
-    .notifications-close { background: rgba(255,255,255,0.2); border: none; color: white; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 16px; }
-    .notification-item { padding: 15px 20px; border-bottom: 1px solid var(--border); display: flex; gap: 12px; transition: all 0.3s; }
-    .notification-item:hover { background: rgba(251,191,36,0.1); }
-    .notification-item.unread { background: rgba(251,191,36,0.05); }
-    .notification-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
-    .notification-content { flex: 1; }
-    .notification-title { font-weight: bold; color: var(--text); margin-bottom: 3px; font-size: 14px; }
-    .notification-text { font-size: 12px; color: var(--text-light); line-height: 1.4; }
-    .notification-time { font-size: 11px; color: var(--text-light); margin-top: 4px; }
-
-    .overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1999; display: none; opacity: 0; transition: opacity 0.3s; }
-    .overlay.active { display: block; opacity: 1; }
-    .main-content { transition: all 0.3s; }
+    .toast-close { background: none; border: none; color: var(--text-light); cursor: pointer; font-size: 16px; margin-right: auto; }
+    
     .main-content.hidden { display: none; }
   </style>
 </head>
-
 <body>
+
   <!-- Loading Screen -->
   <div class="loading-screen" id="loading-screen">
     <div class="loading-logo">⚡</div>
@@ -224,389 +149,316 @@
     <div class="loading-dots"><span></span><span></span><span></span></div>
   </div>
 
-  <!-- Toast Container (واحد فقط) -->
   <div class="toast-container" id="toast-container"></div>
-
-  <!-- Overlay (واحد فقط) -->
-  <div class="overlay" id="overlay" onclick="closeAllPanels()"></div>
-
-  <!-- Notifications Panel (واحد فقط) -->
-  <div class="notifications-panel" id="notifications-panel">
-    <div class="notifications-header">
-      <h3>🔔 الإشعارات</h3>
-      <button class="notifications-close" onclick="toggleNotifications()">✕</button>
-    </div>
-    <div id="notifications-list">
-      <div class="notification-item unread">
-        <div class="notification-icon" style="background: linear-gradient(135deg, #fbbf24, #f59e0b); color: white;">🎉</div>
-        <div class="notification-content">
-          <div class="notification-title">تحديث جديد!</div>
-          <div class="notification-text">تم إضافة ميزات جديدة للمنصة</div>
-          <div class="notification-time">منذ ساعة</div>
-        </div>
-      </div>
-      <div class="notification-item">
-        <div class="notification-icon" style="background: linear-gradient(135deg, #22c55e, #16a34a); color: white;">✅</div>
-        <div class="notification-content">
-          <div class="notification-title">تمت العملية بنجاح</div>
-          <div class="notification-text">تم إتمام معاملتك بنجاح</div>
-          <div class="notification-time">منذ 3 ساعات</div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <header>
     <div class="logo">
       <div class="logo-icon">⚡</div>
       <span>PiNova</span>
-      <span id="pi-status" style="font-size:10px; margin-right:6px; color:var(--text-light); font-weight:600;">جاري التشغيل...</span>
+      <span id="pi-status" style="font-size:10px; margin-right:6px; color:var(--text-light);">جاري...</span>
     </div>
     <div class="header-actions">
-      <button class="icon-btn" onclick="toggleSearch()">🔍</button>
-      <button class="icon-btn" onclick="toggleAIChat()">🤖</button>
-      <button class="icon-btn" onclick="toggleNotifications()" id="notif-btn">🔔<span class="badge" id="notif-badge">2</span></button>
-      <button class="icon-btn" onclick="toggleDashboard()" id="dashboard-btn">📊</button>
-      <button class="icon-btn" onclick="toggleTheme()" id="theme-btn">🌙</button>
-    </div>
+      <button class="icon-btn" onclick="showView('profile')">👤</button>
+    </div.>
   </header>
 
-  <div class="search-container" id="search-container">
-    <div class="search-box">
-      <span>🔍</span>
-      <input type="text" placeholder="ابحث عن خدمة، أداة، أو ميزة..." id="search-input" oninput="handleSearch(this.value)">
-    </div>
-  </div>
-
-  <!-- Main Content -->
-  <div id="main-content" class="main-content">
+  <!-- MAIN HOME VIEW -->
+  <div id="view-home" class="view-container active">
     <section class="hero">
       <div class="hero-badge">✨ الإصدار 2.0 - منصة ذكية متكاملة</div>
-      <h1>PiNova منصة ذكية متكاملة</h1>
-      <p>أدوات الذكاء الاصطناعي، الأمن السيبراني، التجارة الإلكترونية وصناعة المحتوى في مكان واحد</p>
+      <h1>PiNova</h1>
+      <p>أدوات الذكاء الاصطناعي، الأمن السيبراني، التجارة الإلكترونية وصناعة المحتوى</p>
     </section>
 
     <div class="quick-actions">
-      <div class="quick-action" onclick="openSection('content')"><div class="quick-action-icon">✍️</div><div class="quick-action-text">محتوى</div></div>
-      <div class="quick-action" onclick="openSection('cyber')"><div class="quick-action-icon">🛡️</div><div class="quick-action-text">أمان</div></div>
-      <div class="quick-action" onclick="openModal('التجارة الإلكترونية')"><div class="quick-action-icon">🛒</div><div class="quick-action-text">متجر</div></div>
-      <div class="quick-action" onclick="openSection('academy')"><div class="quick-action-icon">🎓</div><div class="quick-action-text">تعلم</div></div>
-      <div class="quick-action" onclick="showTransactions()"><div class="quick-action-icon">💳</div><div class="quick-action-text">معاملات</div></div>
+      <div class="quick-action" onclick="showView('view-content')"><div class="quick-action-icon">✍️</div><div class="quick-action-text">محتوى</div></div>
+      <div class="quick-action" onclick="showView('view-cyber')"><div class="quick-action-icon">🛡️</div><div class="quick-action-text">أمان</div></div>
+      <div class="quick-action" onclick="showView('view-ecommerce')"><div class="quick-action-icon">🛒</div><div class="quick-action-text">متجر</div></div>
+      <div class="quick-action" onclick="showView('view-academy')"><div class="quick-action-icon">🎓</div><div class="quick-action-text">تعلم</div></div>
     </div>
 
     <div class="section-title">🎯 الأدوات الرئيسية</div>
     <div class="cards-grid">
-      <div class="card card-content" onclick="openSection('content')">
-        <div><span class="card-badge">✨ صناعة المحتوى</span><div class="card-icon-main">✳️</div><h3>Content Creation</h3><p>إنشاء محتوى نصي ومرئي وفيديو بالذكاء الاصطناعي</p></div>
-        <button class="card-btn" onclick="event.stopPropagation(); openSection('content')">ابدأ الإنشاء ←</button>
+      <div class="card card-content" onclick="showView('view-content')">
+        <div><span class="card-badge">✨ صناعة المحتوى</span><div class="card-icon-main">✳️</div><h3>Content Creation</h3><p>إنشاء محتوى نصي ومرئي بالذكاء الاصطناعي</p></div>
+        <button class="card-btn">ابدأ الإنشاء ←</button>
       </div>
-      <div class="card card-cyber" onclick="openSection('cyber')">
+      <div class="card card-cyber" onclick="showView('view-cyber')">
         <div><span class="card-badge">🔒 نشط</span><div class="card-icon-main">🛡️</div><h3>Cybersecurity</h3><p>حماية شاملة للبيانات والعملة الرقمية</p></div>
-        <button class="card-btn" onclick="event.stopPropagation(); openSection('cyber')">مركز الأمان ←</button>
+        <button class="card-btn">فحص الأمان ←</button>
       </div>
-      <div class="card card-academy" onclick="openSection('academy')">
-        <div><span class="card-badge">🎓 تعليم</span><div class="card-icon-main">🎓</div><h3>AI & E-commerce Academy</h3><p>تعلّم التجارة الإلكترونية والذكاء الاصطناعي</p></div>
-        <button class="card-btn" onclick="event.stopPropagation(); openSection('academy')">ابدأ التعلم ←</button>
+      <div class="card card-academy" onclick="showView('view-academy')">
+        <div><span class="card-badge">🎓 تعليم</span><div class="card-icon-main">🎓</div><h3>AI Academy</h3><p>تعلّم التجارة الإلكترونية والذكاء الاصطناعي</p></div>
+        <button class="card-btn">ابدأ التعلم ←</button>
       </div>
-      <div class="card card-landing" onclick="openModal('توليد صفحات الهبوط')">
-        <div><span class="card-badge">🤖 AI Powered</span><div class="card-icon-main">🌐</div><h3>توليد صفحات الهبوط</h3><p>إنشاء صفحات هبوط احترافية بالذكاء الاصطناعي</p></div>
-        <button class="card-btn" onclick="event.stopPropagation(); openModal('توليد صفحات الهبوط')">ولّد صفحة ←</button>
+      <div class="card card-ecommerce" onclick="showView('view-ecommerce')">
+        <div><span class="card-badge">🏪 متجر</span><div class="card-icon-main">🛍️</div><h3>E-Commerce</h3><p>سجل متجرك واعرض منتجاتك للعالم</p></div>
+        <button class="card-btn">سجل الآن ←</button>
       </div>
-      <div class="card card-ecommerce" onclick="openModal('التجارة الإلكترونية')">
-        <div><span class="card-badge">🏪 متجر</span><div class="card-icon-main">🛍️</div><h3>التجارة الإلكترونية</h3><p>سجل متجرك واعرض منتجاتك للعالم</p></div>
-        <button class="card-btn" onclick="event.stopPropagation(); openModal('التجارة الإلكترونية')">سجل الآن ←</button>
-      </div>
-      <div class="card card-ads" onclick="openModal('منصة الإشهار')">
+      <div class="card card-ads" onclick="showView('view-ads')">
         <div><span class="card-badge">📢 جديد</span><div class="card-icon-main">📢</div><h3>منصة الإشهار</h3><p>أطلق إعلانات منتجاتك وخدماتك</p></div>
-        <button class="card-btn" onclick="event.stopPropagation(); openModal('منصة الإشهار')">أنشئ إعلان ←</button>
+        <button class="card-btn">أنشئ إعلان ←</button>
       </div>
     </div>
   </div>
 
-  <!-- Dashboard -->
-  <div id="dashboard" class="dashboard-container">
-    <div class="dashboard-header">
-      <h2>📊 لوحة التحكم الذكية</h2>
-      <p>نظرة شاملة على أداء منصتك</p>
+  <!-- 1. CONTENT CREATION MOCKUP -->
+  <div id="view-content" class="view-container">
+    <div class="back-btn" onclick="showView('view-home')">→ رجوع للرئيسية</div>
+    <h2 style="margin-bottom: 15px;">✍️ استوديو صناعة المحتوى</h2>
+    <div class="demo-notice">⚠️ هذه نسخة تجريبية (Demo) للعرض. لا يتم إرسال البيانات إلى أي خادم خارجي.</div>
+    
+    <div class="form-group">
+      <label>نوع المحتوى:</label>
+      <select class="form-input" id="contentType">
+        <option value="text">مقال / منشور اجتماعي</option>
+        <option value="idea">أفكار إبداعية</option>
+      </select>
     </div>
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-card-header">
-          <div><div class="stat-card-value">1,234</div><div class="stat-card-label">إجمالي المستخدمين</div></div>
-          <div class="stat-card-icon" style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white;">👥</div>
-        </div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-card-header">
-          <div><div class="stat-card-value">5,420</div><div class="stat-card-label">معاملات Pi</div></div>
-          <div class="stat-card-icon" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white;">π</div>
-        </div>
-      </div>
+    <div class="form-group">
+      <label>الموضوع أو الكلمة المفتاحية:</label>
+      <input type="text" class="form-input" id="contentPrompt" placeholder="مثال: فوائد التجارة الإلكترونية في Pi Network">
     </div>
-    <div class="chart-container">
-      <div class="chart-header"><div class="chart-title">📈 النمو الشهري</div></div>
-      <canvas id="growthChart"></canvas>
+    <button class="btn-primary" onclick="generateMockContent()">✨ توليد المحتوى بالذكاء الاصطناعي</button>
+    
+    <div id="contentResult" class="result-box">
+      <h4 style="color: var(--primary-dark); margin-bottom: 10px;">🤖 النتيجة المولدة:</h4>
+      <p id="contentText" style="line-height: 1.6; font-size: 14px;"></p>
     </div>
   </div>
 
-  <!-- Profile Page -->
-  <div id="profile" class="profile-container">
+  <!-- 2. CYBERSECURITY MOCKUP -->
+  <div id="view-cyber" class="view-container">
+    <div class="back-btn" onclick="showView('view-home')">→ رجوع للرئيسية</div>
+    <h2 style="margin-bottom: 15px;">🛡️ مركز الأمن السيبراني</h2>
+    <div class="demo-notice">⚠️ فحص تجريبي للواجهة. لا يقوم بقراءة بيانات جهازك الفعلية.</div>
+    
+    <div style="text-align: center; padding: 30px 0;">
+      <div style="font-size: 60px; margin-bottom: 20px;" id="cyberIcon">🛡️</div>
+      <h3 id="cyberStatus">جاهز للفحص</h3>
+      <p style="color: var(--text-light); margin: 10px 0 20px;">تحقق من أمان اتصالك وإعدادات المحفظة</p>
+      <button class="btn-primary" onclick="runMockSecurityScan()" id="cyberBtn">بدء الفحص الشامل</button>
+    </div>
+    
+    <div id="cyberLog" class="result-box" style="text-align: right; font-family: monospace; font-size: 13px;"></div>
+  </div>
+
+  <!-- 3. ACADEMY MOCKUP -->
+  <div id="view-academy" class="view-container">
+    <div class="back-btn" onclick="showView('view-home')">→ رجوع للرئيسية</div>
+    <h2 style="margin-bottom: 15px;">🎓 أكاديمية PiNova</h2>
+    
+    <div class="list-item">
+      <div>
+        <div style="font-weight: bold;">أساسيات محفظة Pi</div>
+        <div style="font-size: 12px; color: var(--text-light);">مدة الدرس: 5 دقائق • مبتدئ</div>
+      </div>
+      <button class="card-btn" onclick="showToast('تم فتح الدرس بنجاح!', 'success')">ابدأ</button>
+    </div>
+    <div class="list-item">
+      <div>
+        <div style="font-weight: bold;">كيف تبيع منتجاتك بـ Pi</div>
+        <div style="font-size: 12px; color: var(--text-light);">مدة الدرس: 10 دقائق • متوسط</div>
+      </div>
+      <button class="card-btn" onclick="showToast('تم فتح الدرس بنجاح!', 'success')">ابدأ</button>
+    </div>
+    <div class="list-item">
+      <div>
+        <div style="font-weight: bold;">مقدمة في الذكاء الاصطناعي</div>
+        <div style="font-size: 12px; color: var(--text-light);">مدة الدرس: 15 دقيقة • متقدم</div>
+      </div>
+      <button class="card-btn" onclick="showToast('تم فتح الدرس بنجاح!', 'success')">ابدأ</button>
+    </div>
+  </div>
+
+  <!-- 4. E-COMMERCE MOCKUP -->
+  <div id="view-ecommerce" class="view-container">
+    <div class="back-btn" onclick="showView('view-home')">→ رجوع للرئيسية</div>
+    <h2 style="margin-bottom: 15px;">🏪 إدارة المتجر</h2>
+    <div class="demo-notice">⚠️ نموذج تجريبي لإضافة المنتجات. لا يتم الحفظ بشكل دائم.</div>
+    
+    <div class="form-group">
+      <label>اسم المنتج:</label>
+      <input type="text" class="form-input" id="prodName" placeholder="مثال: سماعات بلوتوث">
+    </div>
+    <div class="form-group">
+      <label>السعر (Pi):</label>
+      <input type="number" class="form-input" id="prodPrice" placeholder="مثال: 5">
+    </div>
+    <button class="btn-primary" onclick="addMockProduct()">➕ إضافة المنتج</button>
+    
+    <h3 style="margin: 20px 0 10px; font-size: 16px;">📦 منتجاتي الحالية:</h3>
+    <div id="productsList">
+      <div class="list-item">
+        <div>
+          <div style="font-weight: bold;">مثال: قميص PiNova الرسمي</div>
+          <div style="font-size: 14px; color: var(--primary-dark); font-weight: bold;">10 π</div>
+        </div>
+        <span style="font-size: 12px; color: var(--success);">نشط</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. ADS MOCKUP -->
+  <div id="view-ads" class="view-container">
+    <div class="back-btn" onclick="showView('view-home')">→ رجوع للرئيسية</div>
+    <h2 style="margin-bottom: 15px;">📢 منصة الإشهار</h2>
+    <div class="demo-notice">⚠️ نموذج تجريبي لإنشاء الحملات الإعلانية.</div>
+    
+    <div class="form-group">
+      <label>عنوان الإعلان:</label>
+      <input type="text" class="form-input" id="adTitle" placeholder="مثال: خصم 50% على جميع الخدمات">
+    </div>
+    <div class="form-group">
+      <label>الميزانية اليومية (Pi):</label>
+      <input type="number" class="form-input" id="adBudget" placeholder="مثال: 2">
+    </div>
+    <button class="btn-primary" onclick="createMockAd()">🚀 إطلاق الحملة</button>
+  </div>
+
+  <!-- PROFILE VIEW -->
+  <div id="view-profile" class="view-container">
+    <div class="back-btn" onclick="showView('view-home')">→ رجوع للرئيسية</div>
     <div class="profile-header">
       <div class="profile-avatar">👤</div>
-      <div class="profile-name" id="profile-name-display">مستخدم PiNova</div>
-      <div class="profile-email" id="profile-username-display">user@pinova.com</div>
+      <div id="profile-name-display" style="font-size: 20px; font-weight: bold;">زائر</div>
+      <div id="profile-username-display" style="opacity: 0.8; font-size: 14px;">قم بتسجيل الدخول</div>
     </div>
-
     <div class="profile-menu">
-      <!-- زر تسجيل الدخول بـ Pi (مهم جداً للمراجعة) -->
-      <div class="profile-menu-item" onclick="loginWithPi()" style="background: rgba(34, 197, 94, 0.1);">
-        <div class="profile-menu-icon" style="background: rgba(34, 197, 94, 0.2);">π</div>
-        <div class="profile-menu-text">تسجيل الدخول عبر Pi Network</div>
-        <div class="profile-menu-arrow">←</div>
+      <div class="profile-menu-item" onclick="loginWithPi()">
+        <div style="font-size: 20px;">π</div>
+        <div style="flex: 1; font-weight: bold;">تسجيل الدخول عبر Pi Network</div>
+        <div>←</div>
       </div>
-
-      <div class="profile-menu-item" onclick="showToast('المعلومات الشخصية', 'info')">
-        <div class="profile-menu-icon">👤</div>
-        <div class="profile-menu-text">المعلومات الشخصية</div>
-        <div class="profile-menu-arrow">←</div>
+      <div class="profile-menu-item" onclick="window.open('https://elidrissiadam2026.github.io/privacy.html', '_blank')">
+        <div style="font-size: 20px;">🔒</div>
+        <div style="flex: 1; font-weight: bold;">سياسة الخصوصية (Privacy Policy)</div>
+        <div>←</div>
       </div>
-      
-      <!-- روابط سياسة الخصوصية والشروط (إلزامية لفريق المراجعة) -->
-      <div class="profile-menu-item" onclick="window.open('https://pinova-dev.github.io/privacy.html', '_blank')">
-        <div class="profile-menu-icon">🔒</div>
-        <div class="profile-menu-text">سياسة الخصوصية (Privacy Policy)</div>
-        <div class="profile-menu-arrow">←</div>
-      </div>
-      <div class="profile-menu-item" onclick="window.open('https://pinova-dev.github.io/terms.html', '_blank')">
-        <div class="profile-menu-icon">📜</div>
-        <div class="profile-menu-text">شروط الاستخدام (Terms of Service)</div>
-        <div class="profile-menu-arrow">←</div>
-      </div>
-
-      <div class="profile-menu-item" onclick="showToast('المساعدة والدعم', 'info')">
-        <div class="profile-menu-icon">❓</div>
-        <div class="profile-menu-text">المساعدة والدعم</div>
-        <div class="profile-menu-arrow">←</div>
+      <div class="profile-menu-item" onclick="window.open('https://elidrissiadam2026.github.io/terms.html', '_blank')">
+        <div style="font-size: 20px;">📜</div>
+        <div style="flex: 1; font-weight: bold;">شروط الاستخدام (Terms of Service)</div>
+        <div>←</div>
       </div>
     </div>
   </div>
 
-  <!-- Transactions Page -->
-  <div id="transactions" class="transactions-container">
-    <div class="dashboard-header">
-      <h2>💳 سجل المعاملات</h2>
-      <p>جميع معاملاتك المالية</p>
-    </div>
-    <div id="transactions-list"></div>
-  </div>
-
-  <!-- AI Chatbot -->
-  <div class="ai-floating-btn" onclick="toggleAIChat()">🤖</div>
-  <div class="ai-chatbot" id="ai-chatbot">
-    <div class="chatbot-header">
-      <div class="chatbot-avatar">🤖</div>
-      <div class="chatbot-title">
-        <h3>مساعد PiNova الذكي</h3>
-        <div class="chatbot-status">متصل الآن • جاهز للمساعدة</div>
-      </div>
-    </div>
-    <div class="chatbot-messages" id="chatbot-messages">
-      <div class="message ai">
-        <div class="message-avatar">🤖</div>
-        <div class="message-content">مرحباً! أنا مساعد PiNova الذكي.<br>كيف يمكنني مساعدتك اليوم؟</div>
-      </div>
-    </div>
-    <div class="chatbot-input">
-      <input type="text" id="chatbot-input-field" placeholder="اكتب رسالتك هنا..." onkeypress="handleChatKeypress(event)">
-      <button class="chatbot-send" onclick="sendMessage()">➤</button>
-    </div>
-  </div>
-
-  <button class="card-payment-btn" onclick="processCardPayment()">💳 إجراء معاملة تجريبية</button>
-
+  <!-- Bottom Navigation -->
   <nav class="bottom-nav">
-    <div class="nav-item active" onclick="showMain()"><span class="nav-icon">🏠</span><span>الرئيسية</span></div>
-    <div class="nav-item" onclick="showDashboard()"><span class="nav-icon">📊</span><span>الإحصائيات</span></div>
-    <div class="nav-item" onclick="showTransactions()"><span class="nav-icon">💳</span><span>المعاملات</span></div>
-    <div class="nav-item" onclick="showProfile()"><span class="nav-icon">👤</span><span>حسابي</span></div>
+    <div class="nav-item active" onclick="showView('view-home')"><span class="nav-icon">🏠</span><span>الرئيسية</span></div>
+    <div class="nav-item" onclick="showView('view-ecommerce')"><span class="nav-icon">🛒</span><span>المتجر</span></div>
+    <div class="nav-item" onclick="showView('view-profile')"><span class="nav-icon">👤</span><span>حسابي</span></div>
   </nav>
 
   <script>
-    // 1. إخفاء شاشة التحميل
-    window.addEventListener('load', function() {
-      setTimeout(() => document.getElementById('loading-screen').classList.add('hidden'), 1500);
-    });
+    // 1. Loading Screen
+    window.addEventListener('load', () => setTimeout(() => document.getElementById('loading-screen').classList.add('hidden'), 1500));
 
-    // 2. تهيئة Pi SDK بشكل صحيح (هذا ما يبحث عنه فريق المراجعة)
-    let isPiAuthenticated = false;
+    // 2. Pi SDK Init
     if (typeof Pi !== 'undefined') {
-      Pi.init({ version: "2.0", sandbox: true }); // sandbox: true للاختبار، غير إلى false للـ Mainnet
-      
-      document.getElementById('pi-status').textContent = 'SDK جاهز';
+      Pi.init({ version: "2.0", sandbox: true });
+      document.getElementById('pi-status').textContent = 'متصل';
       document.getElementById('pi-status').style.color = '#22c55e';
-    } else {
-      document.getElementById('pi-status').textContent = 'خارج Pi Browser';
     }
 
-    // دالة تسجيل الدخول بـ Pi
-    async function loginWithPi() {
-      if (typeof Pi === 'undefined') {
-        showToast('يرجى فتح التطبيق من داخل متصفح Pi Network', 'error');
-        return;
-      }
-      
-      showToast('جاري الاتصال بـ Pi Network...', 'info');
-      try {
-        const scopes = ['username', 'payments'];
-        const auth = await Pi.authenticate(scopes, onIncompletePaymentFound);
-        
-        isPiAuthenticated = true;
-        document.getElementById('profile-name-display').textContent = auth.user.username;
-        document.getElementById('profile-username-display').textContent = '@' + auth.user.username;
-        showToast('تم تسجيل الدخول بنجاح! مرحباً ' + auth.user.username, 'success');
-      } catch (error) {
-        showToast('فشل تسجيل الدخول: ' + error.message, 'error');
-      }
+    // 3. Navigation Logic
+    function showView(viewId) {
+      document.querySelectorAll('.view-container').forEach(el => el.classList.remove('active'));
+      document.getElementById(viewId).classList.add('active');
+      window.scrollTo(0, 0);
     }
 
-    function onIncompletePaymentFound(payment) {
-      console.log('معالجة دفعة غير مكتملة:', payment);
-    }
-
-    // 3. وظائف التنقل والواجهة
-    function toggleTheme() {
-      const html = document.documentElement;
-      const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      document.getElementById('theme-btn').textContent = newTheme === 'dark' ? '☀️' : '🌙';
-    }
-
-    function toggleSearch() { document.getElementById('search-container').classList.toggle('active'); }
-    function toggleNotifications() {
-      document.getElementById('notifications-panel').classList.toggle('active');
-      document.getElementById('overlay').classList.toggle('active');
-    }
-    function toggleAIChat() { document.getElementById('ai-chatbot').classList.toggle('active'); }
-    function closeAllPanels() {
-      document.getElementById('notifications-panel').classList.remove('active');
-      document.getElementById('overlay').classList.remove('active');
-    }
-
-    function showMain() { switchView('main-content', 'dashboard', 'profile', 'transactions'); }
-    function showDashboard() { 
-      switchView('dashboard', 'main-content', 'profile', 'transactions'); 
-      setTimeout(initCharts, 100);
-    }
-    function showProfile() { switchView('profile', 'main-content', 'dashboard', 'transactions'); }
-    function showTransactions() { 
-      switchView('transactions', 'main-content', 'dashboard', 'profile'); 
-      loadTransactions();
-    }
-
-    function switchView(activeId, ...hiddenIds) {
-      hiddenIds.forEach(id => document.getElementById(id).classList.remove('active', 'hidden'));
-      document.getElementById('main-content').classList.add('hidden'); // افتراضي
-      document.getElementById(activeId).classList.add('active');
-      document.getElementById('main-content').classList.remove('hidden'); // إصلاح
-      
-      // تحديث أزرار التنقل السفلية
-      document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-      event.currentTarget.classList.add('active');
-    }
-
-    // 4. وظائف التطبيق التفاعلية
+    // 4. Toast Notification
     function showToast(message, type = 'info') {
       const container = document.getElementById('toast-container');
       const toast = document.createElement('div');
       toast.className = `toast ${type}`;
       const icons = { success: '✅', error: '❌', info: 'ℹ️' };
-      toast.innerHTML = `<span class="toast-icon">${icons[type]}</span><span class="toast-message">${message}</span><button class="toast-close" onclick="this.parentElement.remove()">×</button>`;
+      toast.innerHTML = `<span>${icons[type]}</span><span style="flex:1; font-size:13px;">${message}</span><button class="toast-close" onclick="this.parentElement.remove()">×</button>`;
       container.appendChild(toast);
       setTimeout(() => toast.remove(), 3000);
     }
 
-    function openSection(section) { showToast('جاري فتح قسم: ' + section, 'info'); }
-    function openModal(title) { showToast('جاري تحميل: ' + title, 'info'); }
-    function processCardPayment() {
-      if (!isPiAuthenticated) {
-        showToast('يرجى تسجيل الدخول عبر Pi أولاً', 'error');
-        showProfile();
+    // 5. MOCKUP FUNCTIONS (التفاعلات الحقيقية التي يريدها فريق المراجعة)
+    
+    // Content Creation Mock
+    function generateMockContent() {
+      const prompt = document.getElementById('contentPrompt').value;
+      if(!prompt) { showToast('يرجى كتابة موضوع أولاً', 'error'); return; }
+      
+      showToast('جاري المعالجة بالذكاء الاصطناعي...', 'info');
+      setTimeout(() => {
+        document.getElementById('contentResult').classList.add('show');
+        document.getElementById('contentText').innerText = `تم إنشاء محتوى ممتاز حول: "${prompt}".\n\nهذا النص هو مثال توضيحي (Mockup) يبين للمستخدم كيف سيبدو المخرج النهائي للذكاء الاصطناعي داخل تطبيق PiNova. في النسخة النهائية، سيتم ربط هذا بحل API حقيقي.`;
+      }, 1500);
+    }
+
+    // Cybersecurity Mock
+    function runMockSecurityScan() {
+      const btn = document.getElementById('cyberBtn');
+      const log = document.getElementById('cyberLog');
+      btn.disabled = true;
+      btn.innerText = 'جاري الفحص...';
+      log.classList.add('show');
+      log.innerHTML = '> بدء بروتوكول الفحص...<br>';
+      
+      setTimeout(() => { log.innerHTML += '> التحقق من تشفير الاتصال... <span style="color:green">آمن</span><br>'; }, 800);
+      setTimeout(() => { log.innerHTML += '> فحص إعدادات الأمان... <span style="color:green">ممتاز</span><br>'; }, 1600);
+      setTimeout(() => { 
+        log.innerHTML += '> <strong>النتيجة النهائية: جهازك ومتصفحك آمنان بنسبة 100%.</strong>';
+        document.getElementById('cyberStatus').innerText = 'آمن ومحمي ✅';
+        document.getElementById('cyberStatus').style.color = 'var(--success)';
+        btn.innerText = 'إعادة الفحص';
+        btn.disabled = false;
+        showToast('تم الفحص بنجاح!', 'success');
+      }, 2500);
+    }
+
+    // E-commerce Mock
+    function addMockProduct() {
+      const name = document.getElementById('prodName').value;
+      const price = document.getElementById('prodPrice').value;
+      if(!name || !price) { showToast('يرجى ملء جميع الحقول', 'error'); return; }
+      
+      const list = document.getElementById('productsList');
+      const newItem = document.createElement('div');
+      newItem.className = 'list-item';
+      newItem.innerHTML = `<div><div style="font-weight: bold;">${name}</div><div style="font-size: 14px; color: var(--primary-dark); font-weight: bold;">${price} π</div></div><span style="font-size: 12px; color: var(--success);">نشط</span>`;
+      list.prepend(newItem);
+      
+      document.getElementById('prodName').value = '';
+      document.getElementById('prodPrice').value = '';
+      showToast('تم إضافة المنتج بنجاح (تجريبي)', 'success');
+    }
+
+    // Ads Mock
+    function createMockAd() {
+      const title = document.getElementById('adTitle').value;
+      if(!title) { showToast('يرجى كتابة عنوان الإعلان', 'error'); return; }
+      showToast('جاري مراجعة الإعلان...', 'info');
+      setTimeout(() => {
+        showToast('تم إطلاق الحملة الإعلانية بنجاح!', 'success');
+        document.getElementById('adTitle').value = '';
+        document.getElementById('adBudget').value = '';
+      }, 1500);
+    }
+
+    // 6. Pi Authentication
+    async function loginWithPi() {
+      if (typeof Pi === 'undefined') {
+        showToast('يرجى فتح التطبيق من داخل متصفح Pi Network', 'error');
         return;
       }
-      showToast('جاري معالجة الدفع عبر Pi Network...', 'info');
-      setTimeout(() => showToast('تمت العملية بنجاح! (وضع تجريبي)', 'success'), 2000);
+      showToast('جاري الاتصال...', 'info');
+      try {
+        const auth = await Pi.authenticate(['username', 'payments'], () => {});
+        document.getElementById('profile-name-display').innerText = auth.user.username;
+        document.getElementById('profile-username-display').innerText = '@' + auth.user.username;
+        showToast('تم تسجيل الدخول بنجاح!', 'success');
+      } catch (e) {
+        showToast('فشل تسجيل الدخول', 'error');
+      }
     }
-
-    function loadTransactions() {
-      const transactions = [
-        { icon: '🛒', title: 'شراء من المتجر', date: '2026-01-15', amount: '-150 π', type: 'negative' },
-        { icon: '💰', title: 'إيداع رصيد', date: '2026-01-14', amount: '+500 π', type: 'positive' },
-        { icon: '🎁', title: 'مكافأة يومية', date: '2026-01-12', amount: '+5 π', type: 'positive' }
-      ];
-      document.getElementById('transactions-list').innerHTML = transactions.map(t => `
-        <div class="transaction-item">
-          <div class="transaction-icon">${t.icon}</div>
-          <div class="transaction-info"><div class="transaction-title">${t.title}</div><div class="transaction-date">${t.date}</div></div>
-          <div class="transaction-amount ${t.type}">${t.amount}</div>
-        </div>
-      `).join('');
-    }
-
-    // 5. Chatbot Logic
-    function handleChatKeypress(event) { if (event.key === 'Enter') sendMessage(); }
-    function sendMessage() {
-      const input = document.getElementById('chatbot-input-field');
-      const message = input.value.trim();
-      if (!message) return;
-      
-      const container = document.getElementById('chatbot-messages');
-      container.innerHTML += `<div class="message user"><div class="message-avatar">👤</div><div class="message-content">${message}</div></div>`;
-      input.value = '';
-      container.scrollTop = container.scrollHeight;
-
-      setTimeout(() => {
-        let response = "شكراً لتواصلك! سأقوم بالرد عليك قريباً.";
-        if (message.includes('مرحبا') || message.includes('هلا')) response = "أهلاً وسهلاً! كيف يمكنني مساعدتك في PiNova؟";
-        if (message.includes('سعر') || message.includes('Pi')) response = "يمكنك متابعة أسعار Pi ومعاملاتك في قسم الإحصائيات.";
-        
-        container.innerHTML += `<div class="message ai"><div class="message-avatar">🤖</div><div class="message-content">${response}</div></div>`;
-        container.scrollTop = container.scrollHeight;
-      }, 800);
-    }
-
-    // 6. Charts (Chart.js)
-    let chartsInitialized = false;
-    function initCharts() {
-      if (chartsInitialized) return;
-      const ctx = document.getElementById('growthChart');
-      if (!ctx) return;
-      
-      new Chart(ctx.getContext('2d'), {
-        type: 'line',
-        data: {
-          labels: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو'],
-          datasets: [{
-            label: 'المستخدمين النشطين',
-            data: [65, 78, 90, 110, 135, 156],
-            borderColor: '#fbbf24',
-            backgroundColor: 'rgba(251, 191, 36, 0.1)',
-            tension: 0.4,
-            fill: true
-          }]
-        },
-        options: { responsive: true, plugins: { legend: { display: false } } }
-      });
-      chartsInitialized = true;
-    }
-
-    // تحميل الثيم المحفوظ
-    window.addEventListener('DOMContentLoaded', function() {
-      const savedTheme = localStorage.getItem('theme') || 'light';
-      document.documentElement.setAttribute('data-theme', savedTheme);
-      const themeBtn = document.getElementById('theme-btn');
-      if (themeBtn) themeBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
-    });
   </script>
 </body>
 </html>
